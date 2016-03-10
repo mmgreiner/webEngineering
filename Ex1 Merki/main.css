@@ -1,3 +1,4 @@
+/*global settings*/
 #container {
 	width: 1217px;
 	margin: auto; 
@@ -9,11 +10,29 @@
 	line-height: 30px;
 }
 
+.h1centered {
+	text-align: center;
+	background-color: none;
+	font-size: 40px;
+	margin: 0px 0px 20px 0px;
+}
+
+hr {
+    outline-width: thick;
+    outline-color: red;
+    color: aqua;
+    width: 60%;
+    outline-width: thick;
+}
+
+/*nav section*/
+
 #nav {
 	background-color: black;
 	height: 45px;
 	position: fixed;
 	width: 1217px;
+	z-index:1;
 }
 
 #nav li{
@@ -27,64 +46,28 @@
 	text-decoration: none; 
 	color: #fff;
 	font-size: 13px;
-	/*font-family: Raleway;*/
 }
 
-[name=home] {
+/*home section*/
+
+#home {
 	background: url(assets/img/header_bg2.jpg);
 	background-repeat: no-repeat;
 	background-size: 100%;
-	/*background-position: 0px -50px;*/
+	background-position: 0px -50px;
 	height: 500px;
-	border-bottom: 0.05em solid gray;
-	/*vertical-align: bottom;*/
-	/*line-height: 400px;*/
-	/*vertical-align: middle;*/
-	/*text-align: center;*/
-	/*display:table-cell;*/
-	/*text-align: center;*/
-	/*margin: auto;*/
-	/*padding-top: 50px;
-	height: 500px;
-	outline: 1px solid red;
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;*/
-	/*width: 1000px;*/
-	/*text-align: center;*/
-	
-	/*display: table-cell;*/
-	/*position: relative;*/
-}
-
-/*#home header {
-	background-color: red;
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-	margin: auto;
-}*/
-
-[name=home] {
-	/*vertical-align: middle;*/
-	/*margin: 0 auto;*/
-	outline: 1px solid red;
-    /*
-	width: 200px;
-	display: inline-block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-    */
+	border-bottom: 0.5px solid gray;
     width: 100%;
     height: 100vh;
+	/*outline: 1px solid red;*/
 }
 
-header h1 {
+#home h1 {
     margin: auto;
-    padding-top: 25%;
+    padding-top: 18%;
 }
-header p {
+
+#home p {
     width: 40%; 
     margin: auto;
     text-align: center;
@@ -94,39 +77,23 @@ header p {
     text-shadow: 2px 2px;
 }
 
+/*about section*/
 
-[name=about] {
+#about {
 	background-color: none;
 	padding: 20px 0px 0px 0px;
 }
 
-[name=about] p {
+#about p {
 	padding: 20px 75px 20px 75px;
 	color: #555555;
-	/*font-family: Lato;*/
-	/*font-size: 12px;*/
-	/*line-height: 20px;*/
-}
-
-.h1centered {
-	text-align: center;
-	background-color: none;
-	font-size: 40px;
-	/*font-family: Raleway;*/
 }
 
 #h1about {
 	color: #5F7F92;
 }
 
-hr {
-    outline-width: thick;
-    outline-color: red;
-    color: aqua;
-    width: 60%;
-    outline-width: thick;
-    
-}
+/*part designer section*/
 
 #partdesigner {
 	background: url(assets/img/bg/divider12.png);
@@ -136,43 +103,42 @@ hr {
 	height: 180px;
 	padding: 50px 228px 20px 225px;
 	color: white;
+}
+
+/*https://davidwalsh.name/css-vertical-center*/
+#partdesigner div {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 	text-align: center;
 }
 
 #partdesigner p {
-	/*font-family: Raleway;*/
 	font-size: 20px;
 	line-height: 30px;
 	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
-#h1partdesigner {
+#partdesigner h1 {
 	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 	margin: 0px 0px 20px 0px;
 }
 
+/*part coder section*/
 #partcoder {
 	background-color: black;
 	color: white;
-	padding: 100px 50px 20px 50px;
-	height: 180px;
+	height: 250px;
 }
 
-#technicalskills2 {
-	background-color: #F5F5F5;
-	height: 350px;
-	/*padding: 30px 50px 20px 50px;*/
-	display: inline-block;
-	width: 100%;
+#partcoder div {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
 }
 
-.charttext {
-    /*text-align: center;*/
-	/*vertical-align: bottom;*/
-	color: white;
-	/*position: absolute;
-	bottom: 10px;*/
-}
+/*technical skills section*/
 
 #technicalskills > div {
     display: inline-block;
@@ -186,63 +152,56 @@ hr {
 	padding: 30px 0px 0px 0px;
 }
 
+.bar {
+	width: 175px;
+	position: relative;
+	margin: 30px 20px 30px 20px;
+}
+
+.charttextupper {
+	text-align: center;
+	position: absolute;
+	bottom: 25px;
+	width: 100%;
+	color: white;
+	font-size: 25px;
+	opacity: 0.3;
+}
+
+.charttextlower {
+	text-align: center;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	color: white;
+	font-size: 15px;
+}
+
 #barhtml {
-	/*background-color: #dcba83;*/
-	/*float: left;*/
-	/*display: inline-block; */
 	outline: 1px solid #61B3A9;
-	width: 100px;
-	height: 190px;
+	height: 285px;
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #61B3A9), color-stop(1, #B0DBD6));
-	margin: 20px 10px 20px 10px;
-	vertical-align:bottom; 
-	/*text-align:center;*/
-	/*position: relative;*/
 }
 
 #barcss {
-	/*background-color: #E1AE9E;*/
-	/*float: left;*/
-	/*display: inline-block; */
 	outline: 1px solid #E1AE9E;
-	width: 100px;
-	height: 160px;
-	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #E1AE9E), color-stop(1, #F4DCD6));
-	margin: 20px 10px 20px 10px;
-	vertical-align: bottom; 
-	/*text-align:center;*/
+	height: 240px;
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #E1AE9E), color-stop(1, #F4DCD6));	
 }
 
 #barjs {
-	/*background-color: #dcba83;*/
-	/*float: left;*/
-	/*display: inline-block; */
 	outline: 1px solid #DFAE36;
-	width: 100px;
-	height: 180px;
+	height: 270px;
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #DFAE36), color-stop(1, #EFC563));
-	margin: 20px 10px 20px 10px;
-	vertical-align: bottom; 
-	/*text-align:center;*/
 }
 
 #barwp {
-	/*background-color: #dcba83;*/
-	/*float: left;*/
-	/*display: inline-block; */
 	outline: 1px solid #bc8e5b;
-	width: 100px;
-	height: 160px;
+	height: 240px;
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #bc8e5b), color-stop(1, #dcba83));
-	margin: 20px 10px 20px 10px;
-	vertical-align:bottom; 
-	/*text-align:center;*/
 }
 
-/*#portfolio img {
-	width: 300px;
-	height: 150px;
-}*/
+/*portfolio (worked on cool stuff) section*/
 
 #portfolioCategories {
 	text-align: center;
@@ -323,9 +282,9 @@ hr {
 	vertical-align: bottom;
 }
 
+/*blog section*/
+
 #blog {
-	/*position: relative;*/
-	/*height: 200px;*/
 	background-color: #F5F5F5;
 	padding: 0px;
 }
@@ -354,73 +313,105 @@ hr {
 	display:inline-block;
 	margin: 0px;
 	padding: 0px;
-	outline: 1px solid red;
-}
-
-.blogpreviews {
-	display:inline-block;
-	vertical-align:top; 
-}
-
-.singleblogpreview {
-	background-color: #2B2B2B;
-	width: 150px;
-	margin: 0px 0px 10px 10px;
-	height: 100px;
 }
 
 .blogauthor img {
-	border: 2px solid pink;
 	margin: 20px 0px 0px 0px;
-	/*text-align: center;*/
 }
 
 .blogauthor h4 {
 	font-size: 15px;
-	/*font-family: Lato;*/
-	margin: 20px 0px 0px 0px;
+	margin: 10px 0px 0px 0px;
 }
 
 .blogauthor h5 {
 	font-size: 10px;
-	/*font-family: Courier;*/
-	margin: 20px 0px 0px 0px;
+	margin: 5px 0px 0px 0px;
 }
 
 .blogtext h2 {
 	font-size: 20px;
-	/*font-family: Raleway;*/
 	margin: 20px 0px 20px 10px;
 }
 
 .blogtext p {
 	font-size: 13px;
-	/*font-family: Lato;*/
 	margin: 20px 0px 20px 10px;
 	line-height: 20px;
 }
 
-.singleblogpreview p {
+.blogtext a {
+	color: #2e80d0;
+	text-decoration: none;
+}
+
+#blogpreviews {
+	display:inline-block;
+	vertical-align:top; 
+}
+
+.blogpreview {
+	background-color: #2B2B2B;
+	width: 150px;
+	margin: 0px 0px 10px 10px;
+	height: 100px;
+	position: relative;
+}
+
+.blogpreview p {
 	font-size: 13px;
-	/*font-family: Lato;*/
+	line-height: 13px;
 	padding: 20px 0px 0px 10px;
 	color: #FFFFFF;
 }
+
+.blogpreview p:nth-child(2n) {
+	font-size: 11px;
+	line-height: 11px;
+	padding: 10px 0px 0px 10px;
+}
+
+.blogpreviewdate {
+	font-size: 5px;
+}
+
+.blogpreview a {
+	font-size: 12px;
+	color: #2e80d0;
+	text-decoration: none;
+	position: absolute;
+	bottom: 5px;
+}
+
+/*crafted section*/
 
 #crafted {
 	background: url(assets/img/bg/divider661.jpg);
 	background-repeat: no-repeat;
 	background-size: 100%;
-	height: 420px; /*needs to be redone*/
+	height: 420px;
 	padding: 20px 0px 0px 0px;
-	outline: 1px solid red;
 	background-position: 0px -20px;
+}
+
+#crafted div {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+}
+
+#crafted h1 {
+	color: white;
 }
 
 #crafted p {
 	color: white;
-	text-align: center;
+	font-size: 25px;
+	line-height: 50px;
 }
+
+/*contact section*/
 
 #contact {
 	margin: 20px 0px 50px 0px;
@@ -430,12 +421,10 @@ hr {
 
 .contact {
 	color: #555555;
-	/*font-family: Raleway;*/
 	display: inline-block;
 	width: 30%;
 	vertical-align: top;
 	text-align: left;
-	/*outline: 1px solid red;*/
 }
 
 .contact h3 {
@@ -444,14 +433,7 @@ hr {
 	font-family: Raleway;
 }
 
-.contact p {
-	/*font-size: 12px;
-	line-height: 18px;*/
-	/*font-family: Raleway;*/
-}
-
 .contact a {
-	/*font-size: 12px;*/
 	line-height: 18px;
 	color: #4db1ea;
 	text-decoration: none;
@@ -465,6 +447,8 @@ hr {
 	margin: 20px 0px 0px 0px;
 	width: 150px;
 }
+
+/*footer*/
 
 #footer {
 	background-color: #2b2b2b;
