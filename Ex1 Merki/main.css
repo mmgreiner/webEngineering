@@ -1,14 +1,36 @@
+/* Change log
+    2016-03-10: Michael: Initial non-responsive version
+    2016-03-11: Markus: 
+*/
+
+@import "http://meyerweb.com/eric/tools/css/reset/reset.css";
+/*@import "reset.css";*/
+
 /*global settings*/
-#container {
-	width: 1217px;
+body {
 	margin: auto; 
+    /*
+    padding: 2%;
+	width: 96%;
+    */
+    width: 100%;
+    background: white;
 	font-family: Lato;
+    font-size: 62.5%;
 	/*font-family: Raleway;*/
 	/*font-family: Times New Roman;*/
 	/*font-family: Serif;*/
-	font-size: 15px;
+	/* font-size: 15px;
 	line-height: 30px;
+    */
 }
+
+/* if we go beyond a small screen, increase the default font size */
+/* TBD doesn't work yet */
+@media only screen and (max-width: 319px) {
+   body { font-size: 200%; }
+}
+
 
 .h1centered {
 	text-align: center;
@@ -17,6 +39,7 @@
 	margin: 0px 0px 20px 0px;
 }
 
+/* the horizontal lines below the headlines are always relative to the box */
 hr {
     outline-width: thick;
     outline-color: red;
@@ -25,43 +48,72 @@ hr {
     outline-width: thick;
 }
 
-/*nav section*/
+/****** Width flex blox ******/
+/* define a class for a flex box that overs the whole width of the screen 
+*/
 
-#nav {
+#home, #about {
+    display: flex;
+    flex-direction: column;
+	border-bottom: 0.5px solid gray;
+    width: 100ww;
+    height: 100vh;
+}
+
+/****** Navigation ******/
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
 	background-color: black;
-	height: 45px;
+    opacity: 0.9;
 	position: fixed;
-	width: 1217px;
-	z-index:1;
+	/* z-index:1;*/
 }
 
-#nav li{
-	display: inline-block;
-	padding: 0px 10px 0px 10px;
+.nav li{
+    margin: 1.0em;
+/*	padding: 0px 10px 0px 10px; */
 	background-color: none;
-    line-height: 32px;
+    line-height: 3.2em;
 }
 
-#nav a{
+.nav a{
 	text-decoration: none; 
+    
 	color: #fff;
-	font-size: 13px;
+	font-size: 2.0em;
 }
 
-/*home section*/
+/****** Home section ******/
+
 
 #home {
-	background: url(assets/img/header_bg2.jpg);
-	background-repeat: no-repeat;
-	background-size: 100%;
-	background-position: 0px -50px;
-	height: 500px;
+    /*
+    display: flex;
+    flex-direction: column;
 	border-bottom: 0.5px solid gray;
-    width: 100%;
-    height: 100vh;
+    width: 100ww;
+    */
+    height: 60vh;
+    /*height: 60vh;*/
 	/*outline: 1px solid red;*/
 }
 
+#home>header {
+  	background: url(assets/img/header_bg2.jpg);
+    height: 100%;
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  
+}
+    
+/* use h1 to move down the text */
 #home h1 {
     margin: auto;
     padding-top: 18%;
@@ -70,42 +122,59 @@ hr {
 #home p {
     width: 40%; 
     margin: auto;
-    text-align: center;
+    position: center;       /* position the box in the middle */
+    text-align: center;     /* position the text in the middle of the box */
     line-height: 1.5;
     font-size: 2.5em;
     color: black;
     text-shadow: 2px 2px;
 }
 
-/*about section*/
+/****** about section *********/
 
 #about {
+    flex-direction: row;
+    height: 40vh;       /* 60vh used up by home */
 	background-color: none;
-	padding: 20px 0px 0px 0px;
-}
-
-#about p {
-	padding: 20px 75px 20px 75px;
-	color: #555555;
 }
 
 #h1about {
+    text-align: center;
+    padding-top: 1em;
 	color: #5F7F92;
 }
 
-/*part designer section*/
+/* looks dump on iphone - */
+#about p {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2em;
+    padding-left: 4em;
+    padding-right: 4em;
+	/* padding: 1em 7.5em; */     /* top and bottom: 2em; right and left 7.5em */
+    font-size: 1.6em;
+	color: #555555;
+}
 
+
+
+/******* part designer section **********/
+
+/* parallax: the picture stays when we scroll.
+   Adapted from: https://davidwalsh.name/parallax
+ */
+ 
 #partdesigner {
 	background: url(assets/img/bg/divider12.png);
-	background-repeat: no-repeat;
-	background-size: 200%;
-	background-position: -550px -30px;
-	height: 180px;
-	padding: 50px 228px 20px 225px;
+    background-attachment : fixed;
+    background-position   : top center;
+    background-size       : cover;
+	height: 18.0em;
+	padding: 5em 23em 2em 22em;
 	color: white;
 }
 
-/*https://davidwalsh.name/css-vertical-center*/
+/*Adapted from https://davidwalsh.name/css-vertical-centerv */
 #partdesigner div {
 	position: relative;
 	top: 50%;
