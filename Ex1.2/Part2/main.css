@@ -18,7 +18,7 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	/*font-family: Lato;*/
     font-size: 62.5%;
-    line-height: 3.0em;
+    /*line-height: 3.0em;*/
 	/*font-family: Raleway;*/
 	/*font-family: Times New Roman;*/
 	/*font-family: Serif;*/
@@ -324,19 +324,23 @@ hr {
 
 #portfolioCategories {
 	text-align: center;
-	/*outline: 1px solid red;*/
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	/*text-align: center;*/
+	/*justify-content: space-between;*/
 }
 
 .portfolioCat {
 	background-color: #808080;
-	display: inline-block;
+	/*display: inline-block;*/
 	width: 120px;
 	color: white;
 	text-align: center;
 	height: 40px;
 	vertical-align: middle;
     line-height: 40px;
-	margin: 0px 50px 0px 50px;
+	margin: 0px 25px 0px 25px;
 	font-size: 1.4em;
 	/*outline: 1px solid red;*/
 }
@@ -344,6 +348,20 @@ hr {
 #portfolioSelected {
 	background-color: #32cd32;
 }
+
+
+@media screen and (max-width: 600px) {
+	#portfolioCategories {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.portfolioCat {
+		margin: 10px 0px 0px 0px;
+	}	
+}
+
 
 #porfolioProjects {
 	/*outline: 1px solid red;*/
@@ -404,7 +422,7 @@ hr {
 
 #blog {
 	background-color: #F5F5F5;
-	padding: 0px;
+	/*padding: 0px;*/
 }
 
 .blogauthor {
@@ -412,8 +430,8 @@ hr {
 	width: 120px;
 	background-color: #2B2B2B;
 	display:inline-block;
-	vertical-align:top; 
-	margin: 0px;
+	/*vertical-align:top; 
+	margin: 0px 0px 0px 0px;*/
 	text-align: center;
 	color: #FFFFFF;
 }
@@ -424,7 +442,7 @@ hr {
 	background-color: #FFFFFF;
 	display:inline-block;
 	vertical-align:top; 
-	margin: 0px;
+	margin: 0px 0px 10px 0px;
 }
 
 .blogitem {
@@ -434,7 +452,7 @@ hr {
 }
 
 .blogauthor img {
-	margin: 20px 0px 0px 0px;
+	margin: 15px 0px 0px 0px;
 }
 
 .blogauthor h4 {
@@ -444,7 +462,7 @@ hr {
 
 .blogauthor h5 {
 	font-size: 10px;
-	margin: 5px 0px 0px 0px;
+	margin: 10px 0px 0px 0px;
 }
 
 .blogtext h2 {
@@ -466,6 +484,7 @@ hr {
 #blogpreviews {
 	display:inline-block;
 	vertical-align:top; 
+	/*outline: 1px solid red;*/
 }
 
 .blogpreview {
@@ -474,6 +493,42 @@ hr {
 	margin: 0px 0px 10px 10px;
 	height: 100px;
 	position: relative;
+}
+
+/* under 768px width the blog previews are displayed on one row -> flex-direction: row
+*
+*/
+
+@media screen and (max-width: 1250px) {
+	#blogpreviews {
+		display: flex;
+		flex-direction: row;
+		/*width: 520px;
+		justify-content: center;*/
+	}
+}
+
+@media screen and (max-width: 540px) {
+	.blogauthor {
+		width: 390px;
+		height: 120px;
+		text-align: left;
+		padding: 0px 0px 0px 10px;
+	}
+	
+	.blogauthor img {
+		margin: 5px 0px 0px 0px;
+	}
+
+	.blogauthor h4 {
+		font-size: 15px;
+		margin: 5px 0px 0px 0px;
+	}
+
+	.blogauthor h5 {
+		font-size: 10px;
+		margin: 5px 0px 0px 0px;
+	}	
 }
 
 .blogpreview p {
@@ -504,45 +559,125 @@ hr {
 /*crafted section*/
 
 #crafted {
-	background: url(assets/img/bg/divider661.jpg);
+	/*background: url(assets/img/bg/divider661.jpg);
 	background-repeat: no-repeat;
 	background-size: 100%;
 	height: 420px;
 	padding: 20px 0px 0px 0px;
 	background-position: 0px -20px;
+	border: 1px solid red;*/
+		
+	position: relative;
+    display: table;
+    height: 300px;
+	width: 100vw;
+    background: url(assets/img/bg/divider661.jpg) no-repeat top center ;
+	background-size: 100% auto;
 }
 
 #crafted div {
-	position: relative;
+	/*position: relative;
 	top: 50%;
 	transform: translateY(-50%);
 	text-align: center;
+	border: 1px solid red;*/
+	
+	display: table-cell;
+    vertical-align: middle;
+	/*border: 1px solid red;*/
+	/*height: 300px;*/
 }
 
 #crafted h1 {
-	color: white;
+	/*color: red;*/
+	
+	text-align: center;
+    color: white;
+    font-size: 165%;
+    font-weight: lighter;
+    /*line-height: 2;*/
+    /*padding: 0 10%;*/
 }
 
 #crafted p {
-	color: white;
+	/*color: red;
 	font-size: 25px;
-	line-height: 50px;
+	line-height: 50px;*/
+	
+	text-align: center;
+    color: white;
+    font-size: 165%;
+    font-weight: lighter;
+    /*line-height: 2;*/
+    /*padding: 0 10%;*/
 }
+
+/*
+.quotation_div {
+    position: relative;
+    display: table;
+    height: 300px;
+    background: url('http://www.mountainprofessor.com/images/mount-ranier-mount-features-2.jpg') no-repeat top center ;
+    background-size: 100% auto;
+}
+
+.overlay {
+    display: table-cell;
+    vertical-align: middle;
+}
+p {
+    text-align: center;
+    color: red;
+    font-size: 165%;
+    font-weight: lighter;
+    line-height: 2;
+    padding: 0 10%;
+}
+*/
 
 /*contact section*/
 
 #contact {
 	margin: 20px 0px 50px 0px;
 	/*outline: 1px solid red;*/
-	text-align: center;
+	text-align: left;
 }
 
+/* id contactInner
+* flex-wrap: wrap -> for splitting up divs onto multiple lines if not enough space
+* justify-content: center -> for centering the divs
+* justify-content: flex-start -> for floating the divs to the left
+* open question: center or flex-start? what looks better?
+*/
+
+#contactInner {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start; /*alternative: center*/
+	padding: 0px 0px 0px 50px;
+	
+	/*justify-content: space-between;*/
+    /*outline: 1px solid #555;*/
+}
+
+@media screen and (max-width: 300px) {
+	#contactInner { 
+		/*flex-direction: column;
+		justify-content: flex-start;
+		background-color: red;*/
+		width: 80vw;
+		margin: 0vw 10vw 0vw 10vw; 
+	}
+}
 .contact {
-	color: #555555;
-	display: inline-block;
-	width: 30%;
-	vertical-align: top;
-	text-align: left;
+	/*color: #555555;*/
+	/*display: inline-block;*/
+	/*vertical-align: top;
+	text-align: left;*/
+	width: 350px;
+	/*outline: 1px solid red;*/
+	margin: 10px 10px 10px 10px;
 }
 
 .contact h3 {
