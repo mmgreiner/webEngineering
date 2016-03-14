@@ -371,8 +371,7 @@ transition:
 
 .bar {
     flex: 10 10 auto;
-    
-	width: 180px;
+	width: 190px;
     position: relative;             /* needed to establish anchor for absolute position */
 	margin: 30px 20px 30px 20px;
 }
