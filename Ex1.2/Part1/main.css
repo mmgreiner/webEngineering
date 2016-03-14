@@ -7,8 +7,17 @@
 /*@import "reset.css";*/
 
 /*global settings*/
+
+/* Reference: http://codeitdown.com/responsive-font-size-css/
+
+For body text, font sizes for body between 14 and 18 px is recommended.
+Pic 16px.
+Line-heigt 1.2 to 1.45em is recommended.
+
+*/
+  
 body {
-	margin: auto; 
+	margin: auto;
     /*
     padding: 2%;
 	width: 96%;
@@ -18,8 +27,8 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	/*font-family: Lato;*/
     font-size: 62.5%;
-    /* line-height: 3.0em; */
     line-height: 1.2;
+    /* line-height: 3.0em; */
 	/*font-family: Raleway;*/
 	/*font-family: Times New Roman;*/
 	/*font-family: Serif;*/
@@ -33,10 +42,9 @@ body {
 
 @media screen and (max-width: 320px) {
    body { 
-       font-size: 2.0em; 
+       font-size: 2.0em;
    }
 }
-
 
 /* standard paragraph font size */
 p {
@@ -50,10 +58,6 @@ p {
 	/* margin-bottom: 1em; */
 }
 
-/* the top menu takes up 4.8em space */
-#about, #portfolio, #blog {
-    padding-top: 4.8em;
-}
 
 /* the horizontal lines below the headlines are always relative to the box */
 hr {
@@ -73,50 +77,67 @@ hr {
     flex-direction: column;
 	border-bottom: 0.5px solid gray;
     width: 100vw;
-    /* height: 100vh; */
 }
 
 /****** Navigation ******/
+
+/* Design:
+The top menu is fixed positioned and of a fixed size of 44px. All 5 items reside in one row.
+
+44px is the design recommendation of Apple "rule of thumb" to make a button still
+touchable.
+This also means that all other divs need an offset from the top of 44px otherwise their top is hidden.
+
+The menu items are left adjusted.
+*/
 
 .nav {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     width: 100%;
     margin: 0 auto;
 	background-color: black;
     opacity: 0.9;
 	position: fixed; 
-    min-height: 4.8em;      /* same as padding-top of main divs */
+    min-height: 4.4em;      /* same as padding-top of main divs */
 	z-index:100;            /* always on top */
+}
+
+#about, #portfolio, #blog {
+    padding-top: 4.4em;
 }
 
 .nav li{
     margin: 1.0em;
 /*	padding: 0px 10px 0px 10px; */
 	background-color: none;
-    line-height: 3.2em;
+    /* line-height: 3.2em; */
 }
 
 
-.nav a{
-    
+.nav a{    
 	text-decoration: none;
 	color: #fff;
 	font-size: 2.0em;
 }
 
 /* TBD: font-size changes for fat fingers */
+/*
 @media screen and (max-width: 320)
 {
     .nav a {
         font-size: 1.8em;
     }
 }
+*/
 
 /****** Home section ******/
 
+/* the picture is always centered. Resolution seems good enough for all
+   responsive sizes.
+*/
 
 #home {
     /*
@@ -125,7 +146,7 @@ hr {
 	border-bottom: 0.5px solid gray;
     width: 100ww;
     */
-    height: 60vh;
+    height: 55vh;
     /*height: 60vh;*/
 	/*outline: 1px solid red;*/
 }
@@ -141,8 +162,14 @@ hr {
     
 /* use h1 to move down the text */
 #home h1 {
-    /* margin: auto; */
-    padding-top: 10%;
+    padding-top: 18%;
+}
+
+@media screen and (max-height: 500px)
+{
+    #home h1 {
+        padding-top: 30%;
+    }
 }
 
 #home p {
@@ -150,18 +177,26 @@ hr {
     margin: auto;
     position: center;       /* position the box in the middle */
     text-align: center;     /* position the text in the middle of the box */
-    line-height: 1.5;
+    /*line-height: 1.5;*/
     color: black;
-    font-size: 3.8em;
+    font-size: 3.0em;
     text-shadow: 2px 2px;
 }
 
 /****** about section *********/
 
+/*
+Design: 
+On desktop, make it fill the whole screen together with the home picture (60vh, 40vh).
+On mobile devices, extend below the viewport.
+Achieve this using min-height.
+*/
+
+
 #about {
     flex-direction: row;
     /* 60vh used up by home */
-    min-height: 40vh;
+    min-height: 45vh;
     /* height: 40vh; */       
 	background-color: none;
     padding-bottom: 1.0em;
@@ -172,14 +207,24 @@ hr {
 	color: #5F7F92;
 }
 
-/* looks dump on iphone - */
-#about p {
+#about>div
+{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+/* looks dump on iphone - */
+#about p {
+    /*
+    display: flex;
+    flex-direction: column;
+    */
     /* padding-top: 1em;*/
     padding-left: 2em;
-    padding-right: 2em;
+    padding-right: 2em;    
     padding-bottom: 1.6em;
+    font-size: 1.6em;       /* still problem, looks too big on iPhone */
 
 	/* padding: 1em 7.5em; */     /* top and bottom: 2em; right and left 7.5em */
 	color: #555555;
@@ -191,6 +236,7 @@ hr {
 
 /* parallax: the picture stays when we scroll.
    Adapted from: https://davidwalsh.name/parallax
+   background-attahment: fixed is used for this.
  */
  
 #partdesigner {
@@ -198,56 +244,98 @@ hr {
     background-attachment : fixed;
     background-position   : top center;
     background-size       : cover;
-	height: 18.0em;
-	padding: 5em 23em 2em 22em;
+	/* height: 18.0em; */
+    height: auto;
+    width: 100vw;
+	/* padding: 5em 23em 2em 22em;*/
 	color: white;
 }
 
 /*Adapted from https://davidwalsh.name/css-vertical-centerv */
-#partdesigner div {
+#partdesigner div, #partcoder div {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100vw;
+    padding-right: 2.8em;       /* left is the same */
+    padding-bottom: 2.8em;
+   
+/*    
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+    */
 	text-align: center;
 }
 
 #partdesigner p, #partcoder p {
-	/* font-size: 2.0em; */
-	line-height: 3em;
+	font-size: 2.0em;
+	/* line-height: 3em; */
 	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+    padding-bottom: 2.8 em;
 }
 
-#partdesigner h1 {
+#partdesigner h1, #partcoder h1 {
 	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
-	margin: 0px 0px 20px 0px;
+	margin-top: 1.0em;
+    margin-bottom: 0.6em;
 }
 
 /*part coder section*/
 #partcoder {
 	background-color: black;
 	color: white;
-	height: 20.0em;
+    height: auto;
+/*	height: 20.0em; */
 }
 
 
+/*
 #partcoder div {
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
 	text-align: center;
 }
+*/
 
 /********* technical skills section **********/
 
+/*
+Design:
+The headline always extends the full width.
+The four boxes should be on one row as long as max-width is > 400.
+IF not, display them in two rows.
+
+Info on Flex in general:
+Good explanation see: 
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes
+
+Always need to define:
+
+Flexbox container:
+display: flex;
+flex-direction: row / column
+justify-content: space-betwee;
+align-items: 
+fex-wrap: 
+
+Flexbox items:
+flex: 1 1 auto   - flex-grow flex-shrink flex-basis;
+transition: 
+*/
 
 #technicalskills {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
+    justify-content: space-between;
     margin-top: 2em;
+    /*
     width: 100%;
     height: fit-content;
+    */
     /*
 	background-color: #F5F5F5;
     text-align: center;
@@ -256,6 +344,14 @@ hr {
 	padding: 30px 0px 0px 0px;
     */
 }
+/*
+@media screen and (max-width: 400)
+{
+    #technicalskills {
+        flex-direction: column;    
+    }
+}
+*/
 
 #technicalskills>h1 {
     width: 100%;
@@ -271,17 +367,12 @@ hr {
 }
 */
 
-/*
-@media screen and (max-width: 320)
-{
-    #bars {
-        flex-flow: column;    
-    }
-}
-*/
+
 
 .bar {
-	width: 20%;
+    flex: 10 10 auto;
+    
+	width: 180px;
     position: relative;             /* needed to establish anchor for absolute position */
 	margin: 30px 20px 30px 20px;
 }
@@ -308,25 +399,24 @@ hr {
 #barhtml {
 	outline: 1px solid #61B3A9;
 	height: 28.5em;
-    width: 22%;
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #61B3A9), color-stop(1, #B0DBD6));
 }
 
 #barcss {
 	outline: 1px solid #E1AE9E;
-	height: 240px;
+	height: 24.0em;
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #E1AE9E), color-stop(1, #F4DCD6));	
 }
 
 #barjs {
 	outline: 1px solid #DFAE36;
-	height: 270px;
+	height: 27.0em;
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #DFAE36), color-stop(1, #EFC563));
 }
 
 #barwp {
 	outline: 1px solid #bc8e5b;
-	height: 240px;
+	height: 24.0em;
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #bc8e5b), color-stop(1, #dcba83));
 }
 
