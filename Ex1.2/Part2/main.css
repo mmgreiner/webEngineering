@@ -362,17 +362,30 @@ hr {
 	}	
 }
 
-
 #porfolioProjects {
 	/*outline: 1px solid red;*/
 	margin: 20px 0px 0px 0px;
 	text-align: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	/*justify-content: space-between;*/
 }
 
 .portfolioFigure {
 	/*outline: 1px solid red;*/
 	display: inline-block;
-	margin: 0px 15px 20px 15px;
+	margin: 0px 25px 20px 25px;
+    /*outline: 1px solid green;	*/
+}
+
+.portfolioFigure figure {
+	/*outline: 1px solid red;*/
+	position: relative;
+    /*outline: 1px solid blue;*/
+	width: 220px;
+	height: 150px;
 }
 
 .portfolioFigure:nth-child(5n) {
@@ -383,39 +396,47 @@ hr {
     outline: 1px solid blue;
 }
 
+.portfolioFigure figcaption{
+	width: 250px;
+	background-color: #3498db;
+	height: 40px;
+	/*line-height: 40px;*/
+	position: absolute;
+	bottom: 0px;
+	left: -15px;
+	/*display: inline-block;*/
+	/*outline: 1px solid red;*/
+	font-size: 12px;
+}
+
 .portfolioFigure h5 {
 	color: white;
-	display: inline;
-	/*position: relative;*/
-	/*position: absolute;*/
-	/*text-align: left;*/
-	/*left: 0px;*/
+	position: absolute;
+	left: 20px;
+	top: 15px;
+	/*padding: -5px 10px -5px 10px;*/
+	margin: 0px;
 	/*margin: 0px 0px 0px 20px;*/
 }
 
 .portfolioFigure a {
 	color: white;	
-	display: inline;
+	/*display: inline;*/
 	background-color: black;
 	padding: 5px 10px 5px 10px;
     text-decoration: none;
-	/*position: relative;
-	right: 5px;*/
-	/*position: absolute;*/
-	/*right: 0px;*/
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	
 }
 
 .portfolioFigure img{
 	width: 220px;
 	height: 150px;
-}
-
-.portfolioFigure figcaption{
-	width: 250px;
-	background-color: #3498db;
-	height: 40px;
-	line-height: 30px;
-	vertical-align: bottom;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
 }
 
 /*blog section*/
