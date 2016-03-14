@@ -1,0 +1,842 @@
+/* Change log
+    2016-03-10: Michael: Initial non-responsive version
+    2016-03-12: Markus: new folder 1.2 
+*/
+
+@import "http://meyerweb.com/eric/tools/css/reset/reset.css";
+/*@import "reset.css";*/
+
+/*global settings*/
+
+/* Reference: http://codeitdown.com/responsive-font-size-css/
+
+For body text, font sizes for body between 14 and 18 px is recommended.
+Pic 16px.
+Line-heigt 1.2 to 1.45em is recommended.
+
+*/
+  
+body {
+	margin: auto;
+    /*
+    padding: 2%;
+	width: 96%;
+    */
+    /*width: 100%;*/
+    background: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	/*font-family: Lato;*/
+    font-size: 62.5%;
+    line-height: 1.2;
+    /* line-height: 3.0em; */
+	/*font-family: Raleway;*/
+	/*font-family: Times New Roman;*/
+	/*font-family: Serif;*/
+	/* font-size: 15px;
+	line-height: 30px;
+    */
+}
+
+/* if we go beyond a small screen, increase the default font size */
+/* TBD doesn't work yet */
+
+@media screen and (max-width: 320px) {
+   body { 
+       font-size: 2.0em;
+   }
+}
+
+/* standard paragraph font size */
+p {
+    font-size: 1.6em;
+}
+
+
+.h1centered {
+	text-align: center;
+	font-size: 2.8em;
+	/* margin-bottom: 1em; */
+}
+
+
+/* the horizontal lines below the headlines are always relative to the box */
+hr {
+    outline-width: thick;
+    outline-color: red;
+    color: aqua;
+    width: 60%;
+    outline-width: thick;
+}
+
+/****** Width flex blox ******/
+/* define a class for a flex box that overs the whole width of the screen 
+*/
+
+#home, #about {
+    display: flex;
+    flex-direction: column;
+	border-bottom: 0.5px solid gray;
+    width: 100vw;
+}
+
+/****** Navigation ******/
+
+/* Design:
+The top menu is fixed positioned and of a fixed size of 44px. All 5 items reside in one row.
+
+44px is the design recommendation of Apple "rule of thumb" to make a button still
+touchable.
+This also means that all other divs need an offset from the top of 44px otherwise their top is hidden.
+
+The menu items are left adjusted.
+*/
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* flex-wrap: wrap; */
+    width: 100%;
+    margin: 0 auto;
+	background-color: black;
+    opacity: 0.9;
+	position: fixed; 
+    min-height: 4.4em;      /* same as padding-top of main divs */
+	z-index:100;            /* always on top */
+}
+
+#about, #portfolio, #blog {
+    padding-top: 4.4em;
+}
+
+.nav li{
+    margin: 1.0em;
+/*	padding: 0px 10px 0px 10px; */
+	background-color: none;
+    /* line-height: 3.2em; */
+}
+
+
+.nav a{    
+	text-decoration: none;
+	color: #fff;
+	font-size: 2.0em;
+}
+
+/* TBD: font-size changes for fat fingers */
+/*
+@media screen and (max-width: 320)
+{
+    .nav a {
+        font-size: 1.8em;
+    }
+}
+*/
+
+/****** Home section ******/
+
+/* the picture is always centered. Resolution seems good enough for all
+   responsive sizes.
+*/
+
+#home {
+    /*
+    display: flex;
+    flex-direction: column;
+	border-bottom: 0.5px solid gray;
+    width: 100ww;
+    */
+    height: 55vh;
+    /*height: 60vh;*/
+	/*outline: 1px solid red;*/
+}
+
+#home>header {
+  	background: url(assets/img/header_bg2.jpg);
+    height: 100%;
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  
+}
+    
+/* use h1 to move down the text */
+#home h1 {
+    padding-top: 18%;
+}
+
+@media screen and (max-height: 500px)
+{
+    #home h1 {
+        padding-top: 30%;
+    }
+}
+
+#home p {
+    width: 40%; 
+    margin: auto;
+    position: center;       /* position the box in the middle */
+    text-align: center;     /* position the text in the middle of the box */
+    /*line-height: 1.5;*/
+    color: black;
+    font-size: 3.0em;
+    text-shadow: 2px 2px;
+}
+
+/****** about section *********/
+
+/*
+Design: 
+On desktop, make it fill the whole screen together with the home picture (60vh, 40vh).
+On mobile devices, extend below the viewport.
+Achieve this using min-height.
+*/
+
+
+#about {
+    flex-direction: row;
+    /* 60vh used up by home */
+    min-height: 45vh;
+    /* height: 40vh; */       
+	background-color: none;
+    padding-bottom: 1.0em;
+}
+
+#h1about {
+    /* padding-top: 0.6em; */
+	color: #5F7F92;
+}
+
+#about>div
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+/* looks dump on iphone - */
+#about p {
+    /*
+    display: flex;
+    flex-direction: column;
+    */
+    /* padding-top: 1em;*/
+    padding-left: 2em;
+    padding-right: 2em;    
+    padding-bottom: 1.6em;
+    font-size: 1.6em;       /* still problem, looks too big on iPhone */
+
+	/* padding: 1em 7.5em; */     /* top and bottom: 2em; right and left 7.5em */
+	color: #555555;
+}
+
+
+
+/******* part designer section **********/
+
+/* parallax: the picture stays when we scroll.
+   Adapted from: https://davidwalsh.name/parallax
+   background-attahment: fixed is used for this.
+ */
+ 
+#partdesigner {
+	background: url(assets/img/bg/divider12.png);
+    background-attachment : fixed;
+    background-position   : top center;
+    background-size       : cover;
+	/* height: 18.0em; */
+    height: auto;
+    width: 100vw;
+	/* padding: 5em 23em 2em 22em;*/
+	color: white;
+}
+
+/*Adapted from https://davidwalsh.name/css-vertical-centerv */
+#partdesigner div, #partcoder div {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100vw;
+    padding-right: 2.8em;       /* left is the same */
+    padding-bottom: 2.8em;
+   
+/*    
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+    */
+	text-align: center;
+}
+
+#partdesigner p, #partcoder p {
+	font-size: 2.0em;
+	/* line-height: 3em; */
+	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+    padding-bottom: 2.8 em;
+}
+
+#partdesigner h1, #partcoder h1 {
+	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
+	margin-top: 1.0em;
+    margin-bottom: 0.6em;
+}
+
+/*part coder section*/
+#partcoder {
+	background-color: black;
+	color: white;
+    height: auto;
+/*	height: 20.0em; */
+}
+
+
+/*
+#partcoder div {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+}
+*/
+
+/********* technical skills section **********/
+
+/*
+Design:
+The headline always extends the full width.
+The four boxes should be on one row as long as max-width is > 400.
+IF not, display them in two rows.
+
+Info on Flex in general:
+Good explanation see: 
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes
+
+Always need to define:
+
+Flexbox container:
+display: flex;
+flex-direction: row / column
+justify-content: space-betwee;
+align-items: 
+fex-wrap: 
+
+Flexbox items:
+flex: 1 1 auto   - flex-grow flex-shrink flex-basis;
+transition: 
+*/
+
+#technicalskills {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 2em;
+    /*
+    width: 100%;
+    height: fit-content;
+    */
+    /*
+	background-color: #F5F5F5;
+    text-align: center;
+    margin: 0px auto;
+    width: 100%;
+	padding: 30px 0px 0px 0px;
+    */
+}
+/*
+@media screen and (max-width: 400)
+{
+    #technicalskills {
+        flex-direction: column;    
+    }
+}
+*/
+
+#technicalskills>h1 {
+    width: 100%;
+}
+
+/* no longer needed 
+#bars {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: flex-end;
+    width: 20%;
+}
+*/
+
+
+
+.bar {
+    flex: 10 10 auto;
+	width: 190px;
+    position: relative;             /* needed to establish anchor for absolute position */
+	margin: 30px 20px 30px 20px;
+}
+
+.charttextupper {
+	text-align: center;
+	position: absolute;
+	bottom: 2.5em;
+	width: 100%;
+	color: white;
+	font-size: 2.6em;
+	opacity: 0.3;
+}
+
+.charttextlower {
+	text-align: center;
+	position: absolute;
+	bottom: 1em;
+	width: 100%;
+	color: white;
+	font-size: 1.5em;
+}
+
+#barhtml {
+	outline: 1px solid #61B3A9;
+	height: 28.5em;
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #61B3A9), color-stop(1, #B0DBD6));
+}
+
+#barcss {
+	outline: 1px solid #E1AE9E;
+	height: 24.0em;
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #E1AE9E), color-stop(1, #F4DCD6));	
+}
+
+#barjs {
+	outline: 1px solid #DFAE36;
+	height: 27.0em;
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #DFAE36), color-stop(1, #EFC563));
+}
+
+#barwp {
+	outline: 1px solid #bc8e5b;
+	height: 24.0em;
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #bc8e5b), color-stop(1, #dcba83));
+}
+
+
+/****** portfolio (worked on cool stuff) section *******/
+
+#portfolioCategories {
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	/*text-align: center;*/
+	/*justify-content: space-between;*/
+}
+
+.portfolioCat {
+	background-color: #808080;
+	/*display: inline-block;*/
+	width: 120px;
+	color: white;
+	text-align: center;
+	height: 40px;
+	vertical-align: middle;
+    line-height: 40px;
+	margin: 0px 25px 0px 25px;
+	font-size: 1.4em;
+	/*outline: 1px solid red;*/
+}
+
+#portfolioSelected {
+	background-color: #32cd32;
+}
+
+
+@media screen and (max-width: 600px) {
+	#portfolioCategories {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.portfolioCat {
+		margin: 10px 0px 0px 0px;
+	}	
+}
+
+#porfolioProjects {
+	/*outline: 1px solid red;*/
+	margin: 20px 0px 0px 0px;
+	text-align: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	/*justify-content: space-between;*/
+}
+
+.portfolioFigure {
+	/*outline: 1px solid red;*/
+	display: inline-block;
+	margin: 0px 25px 20px 25px;
+    /*outline: 1px solid green;	*/
+}
+
+.portfolioFigure figure {
+	/*outline: 1px solid red;*/
+	position: relative;
+    /*outline: 1px solid blue;*/
+	width: 220px;
+	height: 150px;
+}
+
+.portfolioFigure:nth-child(5n) {
+    outline: 1px solid red;	
+}
+
+.portfolioFigure:nth-child(6n) {
+    outline: 1px solid blue;
+}
+
+.portfolioFigure figcaption{
+	width: 250px;
+	background-color: #3498db;
+	height: 40px;
+	/*line-height: 40px;*/
+	position: absolute;
+	bottom: 0px;
+	left: -15px;
+	/*display: inline-block;*/
+	/*outline: 1px solid red;*/
+	font-size: 12px;
+}
+
+.portfolioFigure h5 {
+	color: white;
+	position: absolute;
+	left: 20px;
+	top: 15px;
+	/*padding: -5px 10px -5px 10px;*/
+	margin: 0px;
+	/*margin: 0px 0px 0px 20px;*/
+}
+
+.portfolioFigure a {
+	color: white;	
+	/*display: inline;*/
+	background-color: black;
+	padding: 5px 10px 5px 10px;
+    text-decoration: none;
+	position: absolute;
+	right: 20px;
+	top: 10px;
+	
+}
+
+.portfolioFigure img{
+	width: 220px;
+	height: 150px;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}
+
+/*blog section*/
+
+#blog {
+	background-color: #F5F5F5;
+	/*padding: 0px;*/
+}
+
+.blogauthor {
+	height: 350px;
+	width: 120px;
+	background-color: #2B2B2B;
+	display:inline-block;
+	/*vertical-align:top; 
+	margin: 0px 0px 0px 0px;*/
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.blogtext {
+	height: 350px;
+	width: 400px;
+	background-color: #FFFFFF;
+	display:inline-block;
+	vertical-align:top; 
+	margin: 0px 0px 10px 0px;
+}
+
+.blogitem {
+	display:inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.blogauthor img {
+	margin: 15px 0px 0px 0px;
+}
+
+.blogauthor h4 {
+	font-size: 15px;
+	margin: 10px 0px 0px 0px;
+}
+
+.blogauthor h5 {
+	font-size: 10px;
+	margin: 10px 0px 0px 0px;
+}
+
+.blogtext h2 {
+	font-size: 20px;
+	margin: 20px 0px 20px 10px;
+}
+
+.blogtext p {
+	font-size: 13px;
+	margin: 20px 0px 20px 10px;
+	line-height: 20px;
+}
+
+.blogtext a {
+	color: #2e80d0;
+	text-decoration: none;
+}
+
+#blogpreviews {
+	display:inline-block;
+	vertical-align:top; 
+	/*outline: 1px solid red;*/
+}
+
+.blogpreview {
+	background-color: #2B2B2B;
+	width: 150px;
+	margin: 0px 0px 10px 10px;
+	height: 100px;
+	position: relative;
+}
+
+/* under 768px width the blog previews are displayed on one row -> flex-direction: row
+*
+*/
+
+@media screen and (max-width: 1250px) {
+	#blogpreviews {
+		display: flex;
+		flex-direction: row;
+		/*width: 520px;
+		justify-content: center;*/
+	}
+}
+
+@media screen and (max-width: 540px) {
+	.blogauthor {
+		width: 390px;
+		height: 120px;
+		text-align: left;
+		padding: 0px 0px 0px 10px;
+	}
+	
+	.blogauthor img {
+		margin: 5px 0px 0px 0px;
+	}
+
+	.blogauthor h4 {
+		font-size: 15px;
+		margin: 5px 0px 0px 0px;
+	}
+
+	.blogauthor h5 {
+		font-size: 10px;
+		margin: 5px 0px 0px 0px;
+	}	
+}
+
+.blogpreview p {
+	font-size: 13px;
+	line-height: 13px;
+	padding: 20px 0px 0px 10px;
+	color: #FFFFFF;
+}
+
+.blogpreview p:nth-child(2n) {
+	font-size: 11px;
+	line-height: 11px;
+	padding: 10px 0px 0px 10px;
+}
+
+.blogpreviewdate {
+	font-size: 5px;
+}
+
+.blogpreview a {
+	font-size: 12px;
+	color: #2e80d0;
+	text-decoration: none;
+	position: absolute;
+	bottom: 5px;
+}
+
+/*crafted section*/
+
+#crafted {
+	/*background: url(assets/img/bg/divider661.jpg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+	height: 420px;
+	padding: 20px 0px 0px 0px;
+	background-position: 0px -20px;
+	border: 1px solid red;*/
+		
+	position: relative;
+    display: table;
+    height: 300px;
+	width: 100vw;
+    background: url(assets/img/bg/divider661.jpg) no-repeat top center ;
+	background-size: 100% auto;
+}
+
+#crafted div {
+	/*position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+	border: 1px solid red;*/
+	
+	display: table-cell;
+    vertical-align: middle;
+	/*border: 1px solid red;*/
+	/*height: 300px;*/
+}
+
+#crafted h1 {
+	/*color: red;*/
+	
+	text-align: center;
+    color: white;
+    font-size: 165%;
+    font-weight: lighter;
+    /*line-height: 2;*/
+    /*padding: 0 10%;*/
+}
+
+#crafted p {
+	/*color: red;
+	font-size: 25px;
+	line-height: 50px;*/
+	
+	text-align: center;
+    color: white;
+    font-size: 165%;
+    font-weight: lighter;
+    /*line-height: 2;*/
+    /*padding: 0 10%;*/
+}
+
+/*
+.quotation_div {
+    position: relative;
+    display: table;
+    height: 300px;
+    background: url('http://www.mountainprofessor.com/images/mount-ranier-mount-features-2.jpg') no-repeat top center ;
+    background-size: 100% auto;
+}
+
+.overlay {
+    display: table-cell;
+    vertical-align: middle;
+}
+p {
+    text-align: center;
+    color: red;
+    font-size: 165%;
+    font-weight: lighter;
+    line-height: 2;
+    padding: 0 10%;
+}
+*/
+
+/*contact section*/
+
+#contact {
+	margin: 20px 0px 50px 0px;
+	/*outline: 1px solid red;*/
+	text-align: left;
+}
+
+/* id contactInner
+* flex-wrap: wrap -> for splitting up divs onto multiple lines if not enough space
+* justify-content: center -> for centering the divs
+* justify-content: flex-start -> for floating the divs to the left
+* open question: center or flex-start? what looks better?
+*/
+
+#contactInner {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start; /*alternative: center*/
+	padding: 0px 0px 0px 50px;
+	
+	/*justify-content: space-between;*/
+    /*outline: 1px solid #555;*/
+}
+
+@media screen and (max-width: 300px) {
+	#contactInner { 
+		/*flex-direction: column;
+		justify-content: flex-start;
+		background-color: red;*/
+		width: 80vw;
+		margin: 0vw 10vw 0vw 10vw; 
+	}
+}
+.contact {
+	/*color: #555555;*/
+	/*display: inline-block;*/
+	/*vertical-align: top;
+	text-align: left;*/
+	width: 350px;
+	/*outline: 1px solid red;*/
+	margin: 10px 10px 10px 10px;
+}
+
+.contact h3 {
+	font-size: 20px;
+	margin: 0px 0px 15px 0px;
+	font-family: Raleway;
+}
+
+.contact a {
+	line-height: 18px;
+	color: #4db1ea;
+	text-decoration: none;
+}
+
+#contactform {
+	margin: 20px 0px 0px 0px;
+}
+
+#contactform input {
+	margin: 20px 0px 0px 0px;
+	width: 150px;
+}
+
+/*footer*/
+
+#footer {
+	background-color: #2b2b2b;
+	height: 100px;
+	text-align: center;
+	font-size: 20px;
+	line-height: 100px;
+}
+
+#footer h4 {
+	color: white;
+}
+
+#footer a {
+	color: #2e80d0;
+	text-decoration: none;
+}
