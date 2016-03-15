@@ -140,6 +140,13 @@ Nexus 5X: 411
     }    
 }
 
+@media screen and (max-width: 400px)
+{
+    .nav a{
+        font-size: 14px;
+    }
+}
+
 
 #home {
     height: 55vh;
@@ -209,24 +216,25 @@ Achieve this using min-height.
     justify-content: flex-start;
     align-content: flex-start;
     
-    width: 90%;
+    /* width: 90%; */
+    /*
     padding-left: 2.8em;
     padding-right: 2.8em;
     padding-bottom: 2.8em;
 	text-align: center;
-    
+    */
     min-height: 45vh;
 }
 
 #about>div p {
     /* flex item */
-    flex: 0 1 auto;     /* grow shrink base */
+    /* flex: 0 1 auto; */     /* grow shrink base */
     padding-left: 2em;
     padding-right: 2em;    
     padding-bottom: 1.6em;
     font-size: 16px;  
+    text-align: center;
 
-	/* padding: 1em 7.5em; */     /* top and bottom: 2em; right and left 7.5em */
 	color: #555555;
 }
 
