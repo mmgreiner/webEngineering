@@ -9,12 +9,16 @@ References:
     https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes
     
     https://specificity.keegan.st
+    http://codeitdown.com/responsive-font-size-css/
     
  
 General Flex Design:
 The headline always extends the full width.
 The four boxes should be on one row as long as max-width is > 400.
 IF not, display them in two rows.
+
+For body text, font sizes for body between 14 and 18 px is recommended.
+Pic 16px. Line-heigt 1.2 to 1.45em is recommended.
 
 
 Mandatory definitions for Flexbox container:
@@ -30,17 +34,10 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 */
 
 @import "http://meyerweb.com/eric/tools/css/reset/reset.css";
-/*@import "reset.css";*/
 
-/*global settings*/
+/******* global settings **********/
 
-/* Reference: http://codeitdown.com/responsive-font-size-css/
 
-For body text, font sizes for body between 14 and 18 px is recommended.
-Pic 16px.
-Line-heigt 1.2 to 1.45em is recommended.
-
-*/
  
 body {
 	margin: auto;
@@ -51,16 +48,6 @@ body {
     line-height: 1.2;
 }
 
-/* if we go beyond a small screen, increase the default font size */
-/* TBD doesn't work yet */
-
-/*
-@media screen and (max-width: 320px) {
-   body { 
-       font-size: 2.0em;
-   }
-}
-*/
 
 /* standard paragraph font size */
 p {
@@ -85,9 +72,8 @@ hr {
 }
 
 /****** Width flex blox ******/
-/* define a class for a flex box that overs the whole width of the screen 
-*/
 
+/* define a class for a flex box that overs the whole width of the screen */
 #home, #about {
     display: flex;
     flex-direction: column;
@@ -112,7 +98,6 @@ The menu items are left adjusted.
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    /* flex-wrap: wrap; */
     width: 100vw;
     margin: 0 auto;
 	background-color: black;
@@ -128,9 +113,7 @@ The menu items are left adjusted.
 
 .nav li{
     margin: 1.0em;
-/*	padding: 0px 10px 0px 10px; */
 	background-color: none;
-    /* line-height: 3.2em; */
 }
 
 
