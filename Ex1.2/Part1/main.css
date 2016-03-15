@@ -1,6 +1,7 @@
 /* Change log
     2016-03-10: Michael: Initial non-responsive version
     2016-03-12: Markus: new folder 1.2 
+    2016-03-15: resizing and responsive flex working well.
     
 References:
     https://css-tricks.com/snippets/css/a-guide-to-flexbox/
@@ -336,55 +337,12 @@ Achieve this using min-height.
     align-items: flex-end;
     justify-content: space-around;
     margin-top: 2em;
-    /*
-    width: 100%;
-    height: fit-content;
-    */
-    /*
-	background-color: #F5F5F5;
-    text-align: center;
-    margin: 0px auto;
-    width: 100%;
-	padding: 30px 0px 0px 0px;
-    */
 }
 
-/* for portrait smartphones */
-/*
-@media screen and (max-width: 479) 
-{
-    #technicalskills {
-        flex-direction: column;    
-    }
-    .bar {
-        width: 190px;
-    }
-}
-
-@media screen and (max-width: 1023) and (min-width: 480)
-{
-    #technicalskills {
-        flex-direction: column;
-    }
-    .bar {
-        width: 250px;
-    }
-}
-*/
 
 #technicalskills>h1 {
     width: 100%;
 }
-
-/* no longer needed 
-#bars {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-self: flex-end;
-    width: 20%;
-}
-*/
 
 
 
