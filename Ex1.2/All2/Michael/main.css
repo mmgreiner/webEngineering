@@ -459,11 +459,11 @@ Achieve this using min-height.
 }
 
 .portfolioFigure:nth-child(5n) {
-    outline: 1px solid red;	
+    /*outline: 1px solid red;*/
 }
 
 .portfolioFigure:nth-child(6n) {
-    outline: 1px solid blue;
+    /*outline: 1px solid blue;*/
 }
 
 .portfolioFigure figcaption{
@@ -513,7 +513,6 @@ Achieve this using min-height.
 
 #blog {
 	background-color: #F5F5F5;
-	/*padding: 0px;*/
 }
 
 .blogauthor {
@@ -521,8 +520,6 @@ Achieve this using min-height.
 	width: 120px;
 	background-color: #2B2B2B;
 	display:inline-block;
-	/*vertical-align:top; 
-	margin: 0px 0px 0px 0px;*/
 	text-align: center;
 	color: #FFFFFF;
 }
@@ -547,11 +544,23 @@ flex-wrap:
 Optiona for Flexbox items:
 flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 */
-.blogcontainer {
+#blogcontainer {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+/* when not enough space to show the two blog entries on one line 
+   show all blog items (2 blogs & preview) on separate lines 
+   with the help of flex-direction: column
+   in addition all blog items should be horizontally centered
+   thats achieved with the help of align-items: center;*/
+@media screen and (max-width: 1100px) {
+    #blogcontainer {
+        flex-direction: column;
+		align-items: center;
+    }
 }
 
 .blogitem {
@@ -598,21 +607,16 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	text-decoration: none;
 }
 
-/* does a flex container inside a flex container work ? */
 #blogpreviews {
-    /*
-	display:inline-block;
-	vertical-align:top; 
-    */
     display: flex;
     flex-direction: column;
     justify-content: center;
-	/*outline: 1px solid red;*/
 }
 
-/* when the preview move to the next row, change their order */
-@media screen and (max-width: 1100px)
-{
+/* when not enough space to show the blog previews on the same row
+   they are displayed on a new row 
+   in this case they should be displayed all on one row */
+@media screen and (max-width: 1250px) {
     #blogpreviews {
         flex-direction: row;
     }
@@ -626,25 +630,10 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	position: relative;
 }
 
-/* under 768px width the blog previews are displayed on one row -> flex-direction: row
-*
-*/
-
-/* test with huge max-width to test pure flex container */
-@media screen and (max-width: 0.1250px) {
-	#blogpreviews {
-		display: flex;
-		flex-direction: row;
-		/*width: 520px;
-		justify-content: center;*/
-	}
-}
-
-@media screen and (max-width: 0.540px) {
+@media screen and (max-width: 550px) {
 	.blogauthor {
 		width: 390px;
 		height: 120px;
-		text-align: left;
 		padding: 0px 0px 0px 10px;
 	}
 	
@@ -661,6 +650,10 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 		font-size: 10px;
 		margin: 5px 0px 0px 0px;
 	}	
+	
+	#blogcontainer {
+		margin: 0vw 10vw 0vw 10vw;
+	}
 }
 
 .blogpreview p {
@@ -688,142 +681,113 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	bottom: 5px;
 }
 
-/*crafted section*/
+/* for screens with less width than 450px we make divs of flexible width to avoid horizontal scrolling */
+@media screen and (max-width: 450px) {
+	.blogauthor {
+		width: 80vw;
+		padding: 0px;
+	}
+	.blogtext {
+		width: 80vw;
+	}
+}
 
+/* blogpreviews are hidden for very small screens*/
+@media screen and (max-width: 480px) {
+	#blogpreviews {
+		display: none;
+	}
+}
+
+/******** crafted section **********/
+
+/* section with background picture 
+   background image scale to screen size and is displayed at 100% width
+   display table is needed to center inner div vertically and horizontally */
 #crafted {
-	/*background: url(assets/img/bg/divider661.jpg);
-	background-repeat: no-repeat;
-	background-size: 100%;
-	height: 420px;
-	padding: 20px 0px 0px 0px;
-	background-position: 0px -20px;*/
-	border: 1px solid red;
-		
-	position: relative;
     display: table;
-    /*height: 300px;*/
+    height: 35vw;
 	width: 100vw;
     background: url(assets/img/bg/divider661.jpg) no-repeat top center ;
 	background-size: 100% auto;
 }
 
+/* div inside section which contains the title and the text 
+   was introduced for vertical and horizontal alignment -> with the help of display: table-cell
+   vertical-align is center
+   horizontal-align is center */
 #crafted div {
-	/*position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-	text-align: center;*/
-	/*border: 1px solid blue;*/
-	height: 50vw;
-	
 	display: table-cell;
     vertical-align: middle;
-	/*border: 1px solid red;*/
-	/*height: 300px;*/
+	text-align: center;
+    color: white;
 }
 
+/* title with shadow to make it readable on relatively dark background */
 #crafted h1 {
-	/*color: red;*/
-	
-	text-align: center;
-    color: white;
-    font-size: 165%;
-    font-weight: lighter;
-    /*line-height: 2;*/
-    /*padding: 0 10%;*/
+	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
 }
 
+/* text with override for font-size and line-height in comparison to standard text settings */
 #crafted p {
-	/*color: red;
-	font-size: 25px;
-	line-height: 50px;*/
-	
-	text-align: center;
-    color: white;
-    font-size: 165%;
-    font-weight: lighter;
-    /*line-height: 2;*/
-    /*padding: 0 10%;*/
+    font-size: 2em;
+	line-height: 2;
 }
 
-/*
-.quotation_div {
-    position: relative;
-    display: table;
-    height: 300px;
-    background: url('http://www.mountainprofessor.com/images/mount-ranier-mount-features-2.jpg') no-repeat top center ;
-    background-size: 100% auto;
+/* for screen width less than 500px size of the title and text is changed 
+   in order to avoid overflow of the background image */
+@media screen and (max-width: 500px) {
+	#crafted p {
+        font-size: 1.2em;
+    }    
+	#crafted h1 {
+		font-size: 2.2em;
+	}
 }
 
-.overlay {
-    display: table-cell;
-    vertical-align: middle;
-}
-p {
-    text-align: center;
-    color: red;
-    font-size: 165%;
-    font-weight: lighter;
-    line-height: 2;
-    padding: 0 10%;
-}
-*/
+/******** contact section **********/
 
-/*contact section*/
-
+/* section with contact information
+   all text elements should be aligned left */
 #contact {
-	margin: 20px 0px 50px 0px;
-	/*outline: 1px solid red;*/
 	text-align: left;
 }
 
 /* id contactInner
-* flex-wrap: wrap -> for splitting up divs onto multiple lines if not enough space
-* justify-content: center -> for centering the divs
-* justify-content: flex-start -> for floating the divs to the left
-* open question: center or flex-start? what looks better?
-*/
-
+   flex-wrap: wrap -> for splitting up divs onto multiple lines if not enough space
+   justify-content: center -> for centering the divs */
 #contactInner {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: flex-start; /*alternative: center*/
+	justify-content: center;
 	padding: 0px 0px 0px 50px;
 	
+	/*justify-content: flex-start;*/
 	/*justify-content: space-between;*/
-    /*outline: 1px solid #555;*/
 }
 
-@media screen and (max-width: 300px) {
-	#contactInner { 
-		/*flex-direction: column;
-		justify-content: flex-start;
-		background-color: red;*/
-		width: 80vw;
-		margin: 0vw 10vw 0vw 10vw; 
-	}
-}
+/* divs for contact information have a fixed size and some margin */
 .contact {
-	/*color: #555555;*/
-	/*display: inline-block;*/
-	/*vertical-align: top;
-	text-align: left;*/
 	width: 350px;
-	/*outline: 1px solid red;*/
 	margin: 10px 10px 10px 10px;
+	/*outline: 1px solid red;*/
 }
 
+/* style for titles */
 .contact h3 {
-	font-size: 20px;
+	font-size: 2em;
 	margin: 0px 0px 15px 0px;
 }
 
+/* style for links */
 .contact a {
 	line-height: 18px;
 	color: #4db1ea;
 	text-decoration: none;
 }
 
+/* style for contactform */
 #contactform {
 	margin: 20px 0px 0px 0px;
 }
@@ -833,7 +797,15 @@ p {
 	width: 150px;
 }
 
-/*footer*/
+/* for screen width smaller than 300px the width of the divs are scaled to the viewport */
+@media screen and (max-width: 300px) {
+	#contactInner {
+		width: 80vw;
+		margin: 0vw 10vw 0vw 10vw; 
+	}	
+}
+
+/******** footer **********/
 
 #footer {
 	background-color: #2b2b2b;
@@ -850,4 +822,11 @@ p {
 #footer a {
 	color: #2e80d0;
 	text-decoration: none;
+}
+
+/*added this to resize title if screen with is very small*/
+@media screen and (max-width: 400px) {
+	.h1centered {
+		font-size: 2.2em;
+	}
 }
