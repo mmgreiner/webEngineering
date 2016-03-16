@@ -1,53 +1,50 @@
 /* Change log
     2016-03-10: Michael: Initial non-responsive version
     2016-03-12: Markus: new folder 1.2 
-    2016-03-15: resizing and responsive flex working well.
-    
-References:
-    https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-    https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started
-    https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes
-    
-    https://specificity.keegan.st
-    http://codeitdown.com/responsive-font-size-css/
-    
- 
-General Flex Design:
-The headline always extends the full width.
-The four boxes should be on one row as long as max-width is > 400.
-IF not, display them in two rows.
-
-For body text, font sizes for body between 14 and 18 px is recommended.
-Pic 16px. Line-heigt 1.2 to 1.45em is recommended.
-
-
-Mandatory definitions for Flexbox container:
-display: flex;
-flex-direction: row / column
-justify-content: space-between;
-align-items: 
-flex-wrap: 
-
-Optiona for Flexbox items:
-flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
-   
 */
 
 @import "http://meyerweb.com/eric/tools/css/reset/reset.css";
+/*@import "reset.css";*/
 
-/******* global settings **********/
+/*global settings*/
 
+/* Reference: http://codeitdown.com/responsive-font-size-css/
 
- 
+For body text, font sizes for body between 14 and 18 px is recommended.
+Pic 16px.
+Line-heigt 1.2 to 1.45em is recommended.
+
+*/
+  
 body {
 	margin: auto;
+    /*
+    padding: 2%;
+	width: 96%;
+    */
+    /*width: 100%;*/
     background: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	/*font-family: Lato;*/
     font-size: 62.5%;
     line-height: 1.2;
+    /* line-height: 3.0em; */
+	/*font-family: Raleway;*/
+	/*font-family: Times New Roman;*/
+	/*font-family: Serif;*/
+	/* font-size: 15px;
+	line-height: 30px;
+    */
 }
 
+/* if we go beyond a small screen, increase the default font size */
+/* TBD doesn't work yet */
+
+@media screen and (max-width: 320px) {
+   body { 
+       font-size: 2.0em;
+   }
+}
 
 /* standard paragraph font size */
 p {
@@ -72,8 +69,9 @@ hr {
 }
 
 /****** Width flex blox ******/
+/* define a class for a flex box that overs the whole width of the screen 
+*/
 
-/* define a class for a flex box that overs the whole width of the screen */
 #home, #about {
     display: flex;
     flex-direction: column;
@@ -97,8 +95,8 @@ The menu items are left adjusted.
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: flex-start;
-    width: 100vw;
+    /* flex-wrap: wrap; */
+    width: 100%;
     margin: 0 auto;
 	background-color: black;
     opacity: 0.9;
@@ -113,43 +111,44 @@ The menu items are left adjusted.
 
 .nav li{
     margin: 1.0em;
+/*	padding: 0px 10px 0px 10px; */
 	background-color: none;
+    /* line-height: 3.2em; */
 }
 
 
-.nav a{
-    display: block;
+.nav a{    
 	text-decoration: none;
 	color: #fff;
-	font-size: 20px;
+	font-size: 2.0em;
 }
 
-/* decrease font for mobile
-Width:
-iphone6: 360
-iPhone6Plus: 411
-Galaxy S5: 360
-Nexus 5X: 411
-
-*/
-
-/* 500 px is about the size, when the top menue fills up the whole line */
-@media screen and (max-width: 500px) {
-   .nav a{
-        font-size: 16px;
-    }    
-}
-
-@media screen and (max-width: 400px)
+/* TBD: font-size changes for fat fingers */
+/*
+@media screen and (max-width: 320)
 {
-    .nav a{
-        font-size: 14px;
+    .nav a {
+        font-size: 1.8em;
     }
 }
+*/
 
+/****** Home section ******/
+
+/* the picture is always centered. Resolution seems good enough for all
+   responsive sizes.
+*/
 
 #home {
+    /*
+    display: flex;
+    flex-direction: column;
+	border-bottom: 0.5px solid gray;
+    width: 100ww;
+    */
     height: 55vh;
+    /*height: 60vh;*/
+	/*outline: 1px solid red;*/
 }
 
 #home>header {
@@ -163,9 +162,15 @@ Nexus 5X: 411
     
 /* use h1 to move down the text */
 #home h1 {
-    padding-top: 25vh;
+    padding-top: 18%;
 }
 
+@media screen and (max-height: 500px)
+{
+    #home h1 {
+        padding-top: 30%;
+    }
+}
 
 #home p {
     width: 40%; 
@@ -178,21 +183,6 @@ Nexus 5X: 411
     text-shadow: 2px 2px;
 }
 
-/* move the text below the eyes of the picture and decrease the size somewhat */
-@media screen and (max-height: 500px)
-{
-    #home h1 {
-        padding-top: 20vh;
-    }
-}
-
-@media screen and (max-width: 500px)
-{
-    #home p {
-        font-size: 2.4em;
-    }    
-}
-
 /****** about section *********/
 
 /*
@@ -203,46 +193,41 @@ Achieve this using min-height.
 */
 
 
+#about {
+    flex-direction: row;
+    /* 60vh used up by home */
+    min-height: 45vh;
+    /* height: 40vh; */       
+	background-color: none;
+    padding-bottom: 1.0em;
+}
+
 #h1about {
+    /* padding-top: 0.6em; */
 	color: #5F7F92;
 }
 
-
 #about>div
-{   
-    /* flex container */
+{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-content: flex-start;
-    
-    /* width: 90%; */
-    /*
-    padding-left: 2.8em;
-    padding-right: 2.8em;
-    padding-bottom: 2.8em;
-	text-align: center;
-    */
-    min-height: 45vh;
+    flex-wrap: wrap;
 }
-
-#about>div p {
-    /* flex item */
-    /* flex: 0 1 auto; */     /* grow shrink base */
+/* looks dump on iphone - */
+#about p {
+    /*
+    display: flex;
+    flex-direction: column;
+    */
+    /* padding-top: 1em;*/
     padding-left: 2em;
     padding-right: 2em;    
     padding-bottom: 1.6em;
-    font-size: 16px;  
-    text-align: center;
+    font-size: 1.6em;       /* still problem, looks too big on iPhone */
 
+	/* padding: 1em 7.5em; */     /* top and bottom: 2em; right and left 7.5em */
 	color: #555555;
-}
-
-/* resize for smaller screens */
-@media screen and (max-width: 500px) {
-   #about>div p {
-        font-size: 14px;
-    }    
 }
 
 
@@ -260,32 +245,27 @@ Achieve this using min-height.
     background-position   : top center;
     background-size       : cover;
 	/* height: 18.0em; */
-    /*
-    height: auto; 
-    width: 100vw; */
+    height: auto;
+    width: 100vw;
 	/* padding: 5em 23em 2em 22em;*/
 	color: white;
 }
 
 /*Adapted from https://davidwalsh.name/css-vertical-centerv */
 #partdesigner div, #partcoder div {
-    /* flex container */
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-content: flex-start; 
-    
-    /* width: 100vw; */
-    padding-left: 2.8em;
-    padding-right: 2.8em;      
+    flex: 1 1 auto;
+    width: 100vw;
+    padding-right: 2.8em;       /* left is the same */
     padding-bottom: 2.8em;
-	text-align: center;
    
 /*    
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
     */
+	text-align: center;
 }
 
 #partdesigner p, #partcoder p {
@@ -294,17 +274,11 @@ Achieve this using min-height.
 	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
     padding-bottom: 2.8 em;
 }
-@media screen and (max-width: 500px)
-{
-    #partdesigner p, #partcoder p {
-        font-size: 1.6em;
-    }
-}
 
 #partdesigner h1, #partcoder h1 {
 	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
-	margin-top: 1.0em; 
-    /* margin-bottom: 0.6em; */
+	margin-top: 1.0em;
+    margin-bottom: 0.6em;
 }
 
 /*part coder section*/
@@ -316,32 +290,88 @@ Achieve this using min-height.
 }
 
 
-
+/*
+#partcoder div {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+}
+*/
 
 /********* technical skills section **********/
 
+/*
+Design:
+The headline always extends the full width.
+The four boxes should be on one row as long as max-width is > 400.
+IF not, display them in two rows.
+
+Info on Flex in general:
+Good explanation see: 
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes
+
+Always need to define:
+
+Flexbox container:
+display: flex;
+flex-direction: row / column
+justify-content: space-betwee;
+align-items: 
+fex-wrap: 
+
+Flexbox items:
+flex: 1 1 auto   - flex-grow flex-shrink flex-basis;
+transition: 
+*/
 
 #technicalskills {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 2em;
+    /*
+    width: 100%;
+    height: fit-content;
+    */
+    /*
+	background-color: #F5F5F5;
+    text-align: center;
+    margin: 0px auto;
+    width: 100%;
+	padding: 30px 0px 0px 0px;
+    */
 }
-
+/*
+@media screen and (max-width: 400)
+{
+    #technicalskills {
+        flex-direction: column;    
+    }
+}
+*/
 
 #technicalskills>h1 {
     width: 100%;
 }
 
+/* no longer needed 
+#bars {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: flex-end;
+    width: 20%;
+}
+*/
+
 
 
 .bar {
-    /* flex item */
-    align-self: flex-end;       /* aligns them on buttom */
-    
-	width: 160px;
+    flex: 10 10 auto;
+	width: 190px;
     position: relative;             /* needed to establish anchor for absolute position */
 	margin: 30px 20px 30px 20px;
 }
@@ -389,8 +419,8 @@ Achieve this using min-height.
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #bc8e5b), color-stop(1, #dcba83));
 }
 
-/****** portfolio (worked on cool stuff) section *******/
 
+/****** portfolio (worked on cool stuff) section *******/
 
 #portfolioCategories {
 	text-align: center;
