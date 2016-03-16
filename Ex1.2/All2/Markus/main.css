@@ -58,6 +58,7 @@ p {
 .h1centered {
 	text-align: center;
 	font-size: 2.8em;
+    padding-bottom: 0.3em;
 	/* margin-bottom: 1em; */
 }
 
@@ -147,20 +148,29 @@ Nexus 5X: 411
     }
 }
 
+/******** home ***********/
 
 #home {
-    height: 55vh;
+    height: auto;
 }
 
 #home>header {
-  	background: url(assets/img/header_bg2.jpg);
-    height: 100%;
-	background-repeat: no-repeat;
+    width: 100vw;
+    /* in the end decided to make this fix, looks the best */
+    height: 500px;      
+  	background: url(assets/img/header_bg2.jpg) no-repeat top center;
     background-size: cover;
-    background-position: center;
-  
 }
-    
+
+/* if the screen gets too small height, change to percentage */
+@media screen and (max-height: 600px)
+{
+    #home>header {
+        height: 70vh;
+    }
+}
+
+
 /* use h1 to move down the text */
 #home h1 {
     padding-top: 25vh;
@@ -223,25 +233,27 @@ Achieve this using min-height.
     padding-bottom: 2.8em;
 	text-align: center;
     */
-    min-height: 45vh;
+    /* min-height: 45vh; */
 }
 
 #about>div p {
     /* flex item */
     /* flex: 0 1 auto; */     /* grow shrink base */
-    padding-left: 2em;
-    padding-right: 2em;    
+    padding-left: 6em;
+    padding-right: 6em;    
     padding-bottom: 1.6em;
-    font-size: 16px;  
+    font-size: 14px;  
     text-align: center;
 
 	color: #555555;
 }
 
 /* resize for smaller screens */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
    #about>div p {
-        font-size: 14px;
+       padding-left: 3em;
+       padding-right: 3em;
+        font-size: 12px;
     }    
 }
 
@@ -259,11 +271,6 @@ Achieve this using min-height.
     background-attachment : fixed;
     background-position   : top center;
     background-size       : cover;
-	/* height: 18.0em; */
-    /*
-    height: auto; 
-    width: 100vw; */
-	/* padding: 5em 23em 2em 22em;*/
 	color: white;
 }
 
@@ -275,21 +282,14 @@ Achieve this using min-height.
     justify-content: space-around;
     align-content: flex-start; 
     
-    /* width: 100vw; */
     padding-left: 2.8em;
     padding-right: 2.8em;      
     padding-bottom: 2.8em;
 	text-align: center;
-   
-/*    
-	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
-    */
 }
 
 #partdesigner p, #partcoder p {
-	font-size: 2.0em;
+	font-size: 1.8em;
 	/* line-height: 3em; */
 	text-shadow: -0.5px 0 black, 0 0.5px black, 0.5px 0 black, 0 -0.5px black;
     padding-bottom: 2.8 em;
