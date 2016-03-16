@@ -225,20 +225,9 @@ Achieve this using min-height.
     flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
-    
-    /* width: 90%; */
-    /*
-    padding-left: 2.8em;
-    padding-right: 2.8em;
-    padding-bottom: 2.8em;
-	text-align: center;
-    */
-    /* min-height: 45vh; */
 }
 
 #about>div p {
-    /* flex item */
-    /* flex: 0 1 auto; */     /* grow shrink base */
     padding-left: 6em;
     padding-right: 6em;    
     padding-bottom: 1.6em;
@@ -254,7 +243,8 @@ Achieve this using min-height.
        padding-left: 3em;
        padding-right: 3em;
         font-size: 12px;
-    }    
+    }
+        
 }
 
 
@@ -588,7 +578,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 }
 
 .blogtext p {
-	font-size: 13px;
+	font-size: 14px;
 	margin: 20px 0px 20px 10px;
 	line-height: 20px;
 }
@@ -617,6 +607,8 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
         flex-direction: row;
     }
 }
+
+
 
 .blogpreview {
 	background-color: #2B2B2B;
