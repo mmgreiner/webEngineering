@@ -107,7 +107,7 @@ The menu items are left adjusted.
 	z-index:100;            /* always on top */
 }
 
-#about, #portfolio, #blog {
+#about, #portfolio, #blog, #contact {
     padding-top: 4.4em;
 }
 
@@ -774,7 +774,6 @@ p {
 .contact h3 {
 	font-size: 20px;
 	margin: 0px 0px 15px 0px;
-	font-family: Raleway;
 }
 
 .contact a {
