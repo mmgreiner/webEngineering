@@ -175,7 +175,7 @@ Nexus 5X: 411
     /*line-height: 1.5;*/
     color: black;
     font-size: 3.0em;
-    text-shadow: 2px 2px;
+    text-shadow: 2px 2px white;
 }
 
 /* move the text below the eyes of the picture and decrease the size somewhat */
@@ -611,6 +611,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 }
 
 /* when the preview move to the next row, change their order */
+/* 1019: sieht komisch aus */
 @media screen and (max-width: 1100px)
 {
     #blogpreviews {
@@ -701,7 +702,8 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 		
 	position: relative;
     display: table;
-    height: 300px;
+    height: 30vh;
+    /* height: 300px; */
 	width: 100vw;
     background: url(assets/img/bg/divider661.jpg) no-repeat top center ;
 	background-size: 100% auto;
@@ -714,7 +716,8 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	text-align: center;
 	border: 1px solid red;*/
 	
-	display: table-cell;
+	/* display: table-cell; */
+    padding-top: 20%;
     vertical-align: middle;
 	/*border: 1px solid red;*/
 	/*height: 300px;*/
