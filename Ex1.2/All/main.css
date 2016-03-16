@@ -509,7 +509,7 @@ Achieve this using min-height.
 	left: 0px;
 }
 
-/*blog section*/
+/******** blog section **********/
 
 #blog {
 	background-color: #F5F5F5;
@@ -536,12 +536,38 @@ Achieve this using min-height.
 	margin: 0px 0px 10px 0px;
 }
 
+/*
+Mandatory definitions for Flexbox container:
+display: flex;
+flex-direction: row / column
+justify-content: space-between;
+align-items: 
+flex-wrap: 
+
+Optiona for Flexbox items:
+flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
+*/
+.blogcontainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
 .blogitem {
-	display:inline-block;
+	/* display:inline-block; */
 	margin: 0px;
 	padding: 0px;
 }
 
+.blogauthor {
+    width: 100px;
+	/* height: 120px; */
+	text-align: left;
+    padding-left: 10px;
+/*	padding: 0px 0px 0px 10px; */
+}
+    
 .blogauthor img {
 	margin: 15px 0px 0px 0px;
 }
@@ -572,10 +598,24 @@ Achieve this using min-height.
 	text-decoration: none;
 }
 
+/* does a flex container inside a flex container work ? */
 #blogpreviews {
+    /*
 	display:inline-block;
 	vertical-align:top; 
+    */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 	/*outline: 1px solid red;*/
+}
+
+/* when the preview move to the next row, change their order */
+@media screen and (max-width: 1100px)
+{
+    #blogpreviews {
+        flex-direction: row;
+    }
 }
 
 .blogpreview {
@@ -590,7 +630,8 @@ Achieve this using min-height.
 *
 */
 
-@media screen and (max-width: 1250px) {
+/* test with huge max-width to test pure flex container */
+@media screen and (max-width: 0.1250px) {
 	#blogpreviews {
 		display: flex;
 		flex-direction: row;
@@ -599,7 +640,7 @@ Achieve this using min-height.
 	}
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 0.540px) {
 	.blogauthor {
 		width: 390px;
 		height: 120px;
