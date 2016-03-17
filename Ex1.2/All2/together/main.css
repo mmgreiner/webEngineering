@@ -138,7 +138,7 @@ Nexus 5X: 411
 @media screen and (max-width: 400px)
 {
     .nav a{
-        font-size: 14px;
+        font-size: 10px;
     }
 }
 
@@ -765,7 +765,6 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 .contact {
 	width: 350px;
 	margin: 10px 10px 10px 10px;
-	/*outline: 1px solid red;*/
 }
 
 /* style for titles */
@@ -800,11 +799,36 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 }
 
 /* for screen width smaller than 300px the width of the divs are scaled to the viewport */
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 400px) {
 	#contactInner {
 		width: 80vw;
-		margin: 0vw 10vw 0vw 10vw; 
-	}	
+		margin: 0vw 10vw 0vw 10vw;
+		padding: 0px;
+	}
+	
+	.contact {
+		margin: 20px 0px 20x 0px;
+	}
+	
+	.contact h3 {
+		font-size: 1.6em;
+	}
+
+	.contact a {
+		font-size: 1.2em;
+	}
+	
+	.contact p {
+		font-size: 1.2em;
+	}
+	
+	#contactform input {
+		font-size: 1.2em;
+	}
+
+	#contactform button {
+		font-size: 1.2em;
+	}
 }
 
 /******** footer **********/
