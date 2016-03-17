@@ -185,7 +185,7 @@ Nexus 5X: 411
     /*line-height: 1.5;*/
     color: black;
     font-size: 3.0em;
-    text-shadow: 2px 2px;
+    text-shadow: 2px 2px white;
 }
 
 /* move the text below the eyes of the picture and decrease the size somewhat */
@@ -685,10 +685,13 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 @media screen and (max-width: 450px) {
 	.blogauthor {
 		width: 80vw;
-		padding: 0px;
+		padding: 0px 0px 0px 10px;
+		height: auto;
 	}
 	.blogtext {
 		width: 80vw;
+		padding: 0px 0px 0px 10px;
+		height: auto;
 	}
 }
 
