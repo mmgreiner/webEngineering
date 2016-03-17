@@ -222,7 +222,7 @@ Achieve this using min-height.
     padding-right: 6em;    
     padding-bottom: 1.6em;
     font-size: 14px;  
-    text-align: center;
+    text-align: left;
 	color: #555555;
 }
 
@@ -422,7 +422,7 @@ Achieve this using min-height.
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-	/*justify-content: space-between;*/
+    justify-content: space-around;
 }
 
 .portfolioFigure {
