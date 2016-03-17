@@ -789,6 +789,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 #contactform input {
 	margin: 20px 0px 0px 0px;
 	width: 150px;
+<<<<<<< Updated upstream
 	font-size: 16px;
 }
 
@@ -796,6 +797,13 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 #contactform button {
 	margin: 15px 0px 0px 0px;
 	font-size: 16px;
+=======
+    font-size: 16px;
+}
+
+#contactform button {
+    font-size: 16px;
+>>>>>>> Stashed changes
 }
 
 /* for screen width smaller than 300px the width of the divs are scaled to the viewport */
