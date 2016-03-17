@@ -37,8 +37,6 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 
 /******* global settings **********/
 
-
- 
 body {
 	margin: auto;
     background: white;
@@ -48,12 +46,10 @@ body {
     line-height: 1.2;
 }
 
-
 /* standard paragraph font size */
 p {
     font-size: 1.6em;
 }
-
 
 .h1centered {
 	text-align: center;
@@ -61,7 +57,6 @@ p {
     padding-bottom: 0.3em;
 	/* margin-bottom: 1em; */
 }
-
 
 /* the horizontal lines below the headlines are always relative to the box */
 hr {
@@ -105,7 +100,7 @@ The menu items are left adjusted.
     opacity: 0.9;
 	position: fixed; 
     min-height: 4.4em;      /* same as padding-top of main divs */
-	z-index:100;            /* always on top */
+	z-index:100;            /* gives nav a higher priority which makes sure that it is always on top of all the other items*/
 }
 
 #about, #portfolio, #blog, #contact {
@@ -116,7 +111,6 @@ The menu items are left adjusted.
     margin: 1.0em;
 	background-color: none;
 }
-
 
 .nav a{
     display: block;
@@ -170,12 +164,10 @@ Nexus 5X: 411
     }
 }
 
-
 /* use h1 to move down the text */
 #home h1 {
     padding-top: 25vh;
 }
-
 
 #home p {
     width: 40%; 
@@ -212,11 +204,9 @@ On mobile devices, extend below the viewport.
 Achieve this using min-height.
 */
 
-
 #h1about {
 	color: #5F7F92;
 }
-
 
 #about>div
 {   
@@ -225,26 +215,14 @@ Achieve this using min-height.
     flex-direction: column;
     justify-content: flex-start;
     align-content: flex-start;
-    
-    /* width: 90%; */
-    /*
-    padding-left: 2.8em;
-    padding-right: 2.8em;
-    padding-bottom: 2.8em;
-	text-align: center;
-    */
-    /* min-height: 45vh; */
 }
 
 #about>div p {
-    /* flex item */
-    /* flex: 0 1 auto; */     /* grow shrink base */
     padding-left: 6em;
     padding-right: 6em;    
     padding-bottom: 1.6em;
     font-size: 14px;  
     text-align: center;
-
 	color: #555555;
 }
 
@@ -256,8 +234,6 @@ Achieve this using min-height.
         font-size: 12px;
     }    
 }
-
-
 
 /******* part designer section **********/
 
@@ -315,12 +291,9 @@ Achieve this using min-height.
 /*	height: 20.0em; */
 }
 
-
-
-
 /********* technical skills section **********/
 
-
+/* display set to flex in order to achieve the fluid grid concept*/
 #technicalskills {
     display: flex;
     flex-direction: row;
@@ -330,22 +303,23 @@ Achieve this using min-height.
     margin-top: 2em;
 }
 
-
 #technicalskills>h1 {
     width: 100%;
 }
 
-
-
 .bar {
     /* flex item */
     align-self: flex-end;       /* aligns them on buttom */
-    
 	width: 160px;
-    position: relative;             /* needed to establish anchor for absolute position */
+    position: relative;             /* needed to establish anchor for absolute positioning of text inside the bar */
 	margin: 30px 20px 30px 20px;
 }
 
+/* style of the text inside of the bars
+   in order to place the texts (html/css/javascript/wordpress) as well as the according percentage value
+   inside the bars the position is set to absolute
+   for vertical positioning bottom: 2.5em / 1.5em was used
+*/    
 .charttextupper {
 	text-align: center;
 	position: absolute;
@@ -391,7 +365,8 @@ Achieve this using min-height.
 
 /****** portfolio (worked on cool stuff) section *******/
 
-
+/* for screen sizes of 600px and larger the porfolio categories (nav) are shown on single row
+   this is overriden by a media query for sizes less than 600px which shows the categories in a single column */
 #portfolioCategories {
 	text-align: center;
 	display: flex;
@@ -401,6 +376,7 @@ Achieve this using min-height.
 	/*justify-content: space-between;*/
 }
 
+/* style of the portfolio categories on top of the projects - a kind of navigation for filtering the projects */
 .portfolioCat {
 	background-color: #808080;
 	/*display: inline-block;*/
@@ -415,11 +391,13 @@ Achieve this using min-height.
 	/*outline: 1px solid red;*/
 }
 
+/* in the portfolio menu the menu item "All" is highlighted with a green background */
 #portfolioSelected {
 	background-color: #32cd32;
 }
 
-
+/* for max width of 600px all portfolio categories are displayed beyond each other with the help of flex-direction: column
+   in addition all items are horizontally aligned in the middle */ 
 @media screen and (max-width: 600px) {
 	#portfolioCategories {
 		display: flex;
@@ -432,8 +410,12 @@ Achieve this using min-height.
 	}	
 }
 
+/* portfolio projects are displayed with flex in order to achieve the fluid grid concept
+   at large screen width the projects are shown on one line and while decreasing the window size
+   they are shown on multiple lines -> this is achieved by setting flex-wrap: wrap
+   in general all projects are horizontally aligned in the middle
+*/
 #porfolioProjects {
-	/*outline: 1px solid red;*/
 	margin: 20px 0px 0px 0px;
 	text-align: center;
 	display: flex;
@@ -444,16 +426,17 @@ Achieve this using min-height.
 }
 
 .portfolioFigure {
-	/*outline: 1px solid red;*/
 	display: inline-block;
 	margin: 0px 25px 20px 25px;
-    /*outline: 1px solid green;	*/
 }
 
+/* figure contains the image and the figcaption with the description
+   in order to achieve the positioning of the image and the figcaption 
+   (they should be aligned at the bottom and the figcaption should be on top of the img)
+   the figure position was set to relative
+*/
 .portfolioFigure figure {
-	/*outline: 1px solid red;*/
 	position: relative;
-    /*outline: 1px solid blue;*/
 	width: 220px;
 	height: 150px;
 }
@@ -466,6 +449,7 @@ Achieve this using min-height.
     /*outline: 1px solid blue;*/
 }
 
+/* in order to show the figcaption on top of the img the position is set to absolute and bottom: 0px*/
 .portfolioFigure figcaption{
 	width: 250px;
 	background-color: #3498db;
@@ -474,11 +458,10 @@ Achieve this using min-height.
 	position: absolute;
 	bottom: 0px;
 	left: -15px;
-	/*display: inline-block;*/
-	/*outline: 1px solid red;*/
 	font-size: 12px;
 }
 
+/* the tite of the discription is set to position absolute in order to achieve the wanted positioning inside the figcaption*/
 .portfolioFigure h5 {
 	color: white;
 	position: absolute;
@@ -489,6 +472,7 @@ Achieve this using min-height.
 	/*margin: 0px 0px 0px 20px;*/
 }
 
+/* the link to the project is set to position absolute in order to achieve the wanted positioning inside the figcaption*/
 .portfolioFigure a {
 	color: white;	
 	/*display: inline;*/
@@ -501,6 +485,7 @@ Achieve this using min-height.
 	
 }
 
+/* in order to show the image beyond the figcaption the position is set to absolute and bottom: 0px*/
 .portfolioFigure img{
 	width: 220px;
 	height: 150px;
@@ -597,7 +582,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 }
 
 .blogtext p {
-	font-size: 13px;
+	font-size: 14px;
 	margin: 20px 0px 20px 10px;
 	line-height: 20px;
 }
@@ -615,7 +600,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 
 /* when not enough space to show the blog previews on the same row
    they are displayed on a new row 
-   in this case they should be displayed all on one row */
+   in this case they should be displayed all on one row -> flex-direction: row*/
 @media screen and (max-width: 1250px) {
     #blogpreviews {
         flex-direction: row;
@@ -630,6 +615,9 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	position: relative;
 }
 
+/* in case of a screen smaller than 550px the div with the author information 
+   should be placed on top of the blog text
+   this means that we have to change the width and the positioning of the inner items (picture, authorinfo)*/
 @media screen and (max-width: 550px) {
 	.blogauthor {
 		width: 390px;
@@ -681,7 +669,8 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	bottom: 5px;
 }
 
-/* for screens with less width than 450px we make divs of flexible width to avoid horizontal scrolling */
+/* for screens with less width than 450px we make divs of flexible width to avoid horizontal scrolling
+   in addition the height is set to auto in order to avoid text-overflow */
 @media screen and (max-width: 450px) {
 	.blogauthor {
 		width: 80vw;
@@ -695,7 +684,9 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	}
 }
 
-/* blogpreviews are hidden for very small screens*/
+/* blogpreviews are hidden for very small screens
+   display: none helps to avoid that the div still needs space even it is not visible
+   visibility: hidden leads to this problem (hides div but space still needed)*/
 @media screen and (max-width: 480px) {
 	#blogpreviews {
 		display: none;
@@ -810,6 +801,10 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 
 /******** footer **********/
 
+/*footer has a fixed hight of 100px
+  the width is adjusted to the screen width
+  in order to achieve vertical centering of the text the line-height is set to the height of the footer
+  in order to achieve horizontal centering the text-align is set to center*/
 #footer {
 	background-color: #2b2b2b;
 	height: 100px;
@@ -827,7 +822,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	text-decoration: none;
 }
 
-/*added this to resize title if screen with is very small*/
+/*added this to resize the titles if screen with is very small*/
 @media screen and (max-width: 400px) {
 	.h1centered {
 		font-size: 2.2em;
