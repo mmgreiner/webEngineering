@@ -422,6 +422,7 @@ Achieve this using min-height.
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
+	justify-content: space-around;
 	/*justify-content: space-between;*/
 }
 
