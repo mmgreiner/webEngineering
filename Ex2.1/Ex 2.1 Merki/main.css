@@ -422,12 +422,8 @@ Achieve this using min-height.
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
-<<<<<<< HEAD
-    justify-content: space-around;
-=======
 	justify-content: space-around;
 	/*justify-content: space-between;*/
->>>>>>> origin/master
 }
 
 .portfolioFigure {
@@ -442,16 +438,9 @@ Achieve this using min-height.
 */
 .portfolioFigure figure {
 	position: relative;
-	width: 220px;
+	width: 250px; /*ex 1: 220px*/
 	height: 150px;
-}
-
-.portfolioFigure:nth-child(5n) {
-    /*outline: 1px solid red;*/
-}
-
-.portfolioFigure:nth-child(6n) {
-    /*outline: 1px solid blue;*/
+	/*outline: 1px solid red;*/
 }
 
 /* in order to show the figcaption on top of the img the position is set to absolute and bottom: 0px*/
@@ -462,8 +451,42 @@ Achieve this using min-height.
 	/*line-height: 40px;*/
 	position: absolute;
 	bottom: 0px;
-	left: -15px;
+	left: 0px; /*ex 1: -15px*/
 	font-size: 12px;
+	/*outline: 1px solid black;*/
+	
+	/*animation
+	  the change of the height takes 0.1 second */
+	/*transition: height 0.1s;
+	transition: line-height 2s;*/
+	transition-property: height;
+	transition-duration: 1s;
+}
+
+/* animation 
+   on mouse hover over portfolioFigure div the following happens
+    - the height of figcaption is changed to 100% 
+	- the background of figcaption is becoming a gradient background from blue to red 
+	- category is shifted into middle of portfolioFigure div
+*/
+.portfolioFigure:hover figcaption {
+	height: 100%;
+	background: linear-gradient(rgba(52, 152, 219, 0), rgba(255, 100, 100, 1));
+	/*margin: 50px;*/
+	/*line-height: 150px;*/
+}
+
+/*http://stackoverflow.com/questions/19461521/how-to-center-an-element-horizontally-and-vertically*/
+.portfolioFigure:hover h5 {
+	position: absolute;
+	top: 50%;
+	left: 50%;    
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.portfolioFigure:hover a {
+	/*outline: 1px solid red;*/
+	width: 190px;
 }
 
 /* the tite of the discription is set to position absolute in order to achieve the wanted positioning inside the figcaption*/
@@ -472,9 +495,10 @@ Achieve this using min-height.
 	position: absolute;
 	left: 20px;
 	top: 15px;
-	/*padding: -5px 10px -5px 10px;*/
 	margin: 0px;
-	/*margin: 0px 0px 0px 20px;*/
+	
+	transition-property: top, left;
+	transition-duration: 1s, 1s;
 }
 
 /* the link to the project is set to position absolute in order to achieve the wanted positioning inside the figcaption*/
@@ -486,13 +510,13 @@ Achieve this using min-height.
     text-decoration: none;
 	position: absolute;
 	right: 20px;
-	top: 10px;
-	
+	bottom: 10px;
+	line-height: 15px;
 }
 
 /* in order to show the image beyond the figcaption the position is set to absolute and bottom: 0px*/
 .portfolioFigure img{
-	width: 220px;
+	width: 100%;
 	height: 150px;
 	position: absolute;
 	bottom: 0px;
@@ -802,13 +826,10 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 #contactform button {
 	margin: 15px 0px 0px 0px;
 	font-size: 16px;
-=======
-    font-size: 16px;
 }
 
 #contactform button {
     font-size: 16px;
->>>>>>> Stashed changes
 }
 
 /* for screen width smaller than 300px the width of the divs are scaled to the viewport */
