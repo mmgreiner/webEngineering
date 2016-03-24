@@ -208,7 +208,7 @@ Achieve this using min-height.
 	color: #5F7F92;
 }
 
-#about>div
+#about
 {   
     /* flex container */
     display: flex;
@@ -217,7 +217,7 @@ Achieve this using min-height.
     align-content: flex-start;
 }
 
-#about>div p {
+#about p {
     padding-left: 6em;
     padding-right: 6em;    
     padding-bottom: 1.6em;
@@ -251,7 +251,7 @@ Achieve this using min-height.
 }
 
 /*Adapted from https://davidwalsh.name/css-vertical-centerv */
-#partdesigner div, #partcoder div {
+#partdesigner, #partcoder  {
     /* flex container */
     display: flex;
     flex-direction: column;
@@ -429,6 +429,9 @@ Achieve this using min-height.
 .portfolioFigure {
 	display: inline-block;
 	margin: 0px 25px 20px 25px;
+    position: relative;
+    width: 220px;
+    height: 150px;
 }
 
 /* figure contains the image and the figcaption with the description
@@ -436,11 +439,9 @@ Achieve this using min-height.
    (they should be aligned at the bottom and the figcaption should be on top of the img)
    the figure position was set to relative
 */
-.portfolioFigure figure {
-	position: relative;
-	width: 220px;
-	height: 150px;
-}
+/*.portfolioFigure figure {*/
+/*	*/
+/*}*/
 
 .portfolioFigure:nth-child(5n) {
     /*outline: 1px solid red;*/
@@ -705,18 +706,19 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	width: 100vw;
     background: url(assets/img/bg/divider661.jpg) no-repeat top center ;
 	background-size: 100% auto;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
 }
 
 /* div inside section which contains the title and the text 
    was introduced for vertical and horizontal alignment -> with the help of display: table-cell
    vertical-align is center
    horizontal-align is center */
-#crafted div {
-	display: table-cell;
-    vertical-align: middle;
-	text-align: center;
-    color: white;
-}
+/*#crafted  {*/
+/*	*/
+/*}*/
 
 /* title with shadow to make it readable on relatively dark background */
 #crafted h1 {
