@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title> J. O. Rob main page</title>
+    <link rel="stylesheet" href="main.css">
+    <!-- <link rel="stylesheet" href="reset.css"> Reset done in style sheet -->
+    <!-- fonts not found
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    -->
+
+    <!-- revision history:
+    2016-03-12: Original Markus 1.2
+    2016-03-19: HTML5 Andrea
+    -->
+
+    <!-- was used during debugging 
+    <script>
+        window.addEventListener('resize', function () { 
+            "use strict";
+            window.location.reload(); 
+            console.log("refreshing");
+        });
+    </script>
+	-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <!-- <script src="./scripts/animation.js"></script> -->
+</head>
+
+<body data-spy="scroll" data-offset="0" data-target="#navbar-main">
+
+
+    <!-- ==== MENU ==== -->
+    <nav>
+        <ul class="nav">
+            <li> <a href="#home">Home</a></li>
+            <li> <a href="#about"> About Me</a></li>
+            <li> <a href="#portfolio"> Portfolio</a></li>
+            <li> <a href="#blog"> Blog</a></li>
+            <li> <a href="#contact"> Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- ==== HEADER ==== -->
+    <section id="home">
+        <header>
+            <h1><span ></span></h1>
+            <div class="slide">
+                <p>A 2.0 web developer.</p>
+                <p>At your service</p>
+            </div>
+        </header>
+    </section>
+
+
+    <!-- ==== ABOUT ==== -->
+    <section id="about">
+        <br>
+        <h1 class="h1centered" id="h1about">A LITTLE ABOUT MY SELF</h1>
+        <hr>
+        <div>
+
+            <p>I am a UX/UI Designer and Front End developer from Zurich, Switzerland. I love to solve complex problem, create
+                new and simple design solution for different topics. I create beautiful, usable, professional websites using
+                best practice accessibility and the latest W3C web standards guidelines, resulting in semantic and seo friendly
+                XHTML and CSS. All my websites are lovingly hand coded. 
+            </p>
+            <p> At first I intended to be an animator and went to design school fully motivated to become just that. One thing
+                led to another and 2 years went by and I was a (almost) fully fledged freelance web designer without ever
+                planning to become one. When I am not coding or designing some new websites I am usually at the gym doing
+                boldring. To relax my nerve I like to play videogames with some friends while eating pizza! .
+            </p>
+            <p> At first I intended to be an animator and went to design school fully motivated to become just that. One thing
+                led to another and 2 years went by and I was a (almost) fully fledged freelance web designer without ever
+                planning to become one. When I am not coding or designing some new websites I am usually at the gym doing
+                boldring. To relax my nerve I like to play videogames with some friends while eating pizza! .
+            </p>
+        </div>
+    </section>
+
+<p id="test">This is a test line</p>
+
+    <!-- ==== FOOTER ==== -->
+    <footer id="footer">
+        <h4>Created by <a href="http://globis.co">globis</a> </h4>
+    </footer>
+
+<script>
+    $(window).scroll(function() {
+        $("#test").each(function() {
+            var imagePos = $(this).offset().top;
+            var topOfWindow = $(window).scrollTop();
+            var height = $(window).innerHeight();
+            console.log("hit scrolling " + imagePos + " " + topOfWindow + " " + height);
+            if (imagePos < topOfWindow+height) {
+                $(this).addClass("slide");
+            }
+        })
+    })
+    </script>
+</body>
+
+</html>

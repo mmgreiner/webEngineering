@@ -1,0 +1,276 @@
+/* Change log
+    2016-03-10: Michael: Initial non-responsive version
+    2016-03-12: Markus: new folder 1.2 
+    2016-03-15: resizing and responsive flex working well.
+    
+References:
+    https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+    https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_started
+    https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Using_CSS_flexible_boxes
+    
+    https://specificity.keegan.st
+    http://codeitdown.com/responsive-font-size-css/
+    
+ 
+General Flex Design:
+The headline always extends the full width.
+The four boxes should be on one row as long as max-width is > 400.
+IF not, display them in two rows.
+
+For body text, font sizes for body between 14 and 18 px is recommended.
+Pic 16px. Line-heigt 1.2 to 1.45em is recommended.
+
+
+Mandatory definitions for Flexbox container:
+display: flex;
+flex-direction: row / column
+justify-content: space-between;
+align-items: 
+flex-wrap: 
+
+Optiona for Flexbox items:
+flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
+   
+*/
+
+@import "http://meyerweb.com/eric/tools/css/reset/reset.css";
+
+/******* global settings **********/
+
+body {
+	margin: auto;
+    background: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	/*font-family: Lato;*/
+    font-size: 62.5%;
+    line-height: 1.2;
+    overflow-y: scroll;
+}
+
+/* standard paragraph font size */
+p {
+    font-size: 1.6em;
+}
+
+
+/* define a class for a flex box that overs the whole width of the screen */
+#home, #about {
+    display: flex;
+    flex-direction: column;
+	border-bottom: 0.5px solid gray;
+    width: 100vw;
+    padding-top: 4.4em;
+}
+
+/****** Navigation ******/
+
+/* Design:
+The top menu is fixed positioned and of a fixed size of 44px. All 5 items reside in one row.
+
+44px is the design recommendation of Apple "rule of thumb" to make a button still
+touchable.
+This also means that all other divs need an offset from the top of 44px otherwise their top is hidden.
+
+The menu items are left adjusted.
+*/
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100vw;
+    margin: 0 auto;
+	background-color: black;
+    opacity: 0.9;
+	position: fixed; 
+    min-height: 4.4em;      /* same as padding-top of main divs */
+	z-index:100;            /* gives nav a higher priority which makes sure that it is always on top of all the other items*/
+}
+
+
+.nav li{
+    margin: 1.0em;
+	background-color: none;
+}
+
+.nav a{
+    display: block;
+	text-decoration: none;
+	color: #fff;
+	font-size: 20px;
+}
+
+/* decrease font for mobile
+Width:
+iphone6: 360
+iPhone6Plus: 411
+Galaxy S5: 360
+Nexus 5X: 411
+
+*/
+
+/* 500 px is about the size, when the top menue fills up the whole line */
+@media screen and (max-width: 500px) {
+   .nav a{
+        font-size: 16px;
+    }    
+}
+
+@media screen and (max-width: 400px)
+{
+    .nav a{
+        font-size: 10px;
+    }
+}
+
+/******** home ***********/
+
+#home {
+    height: auto;
+}
+
+#home>header {
+    width: 100vw;
+    /* in the end decided to make this fix, looks the best */
+    height: 500px;      
+  	background: url(assets/img/header_bg2.jpg) no-repeat top center;
+    background-size: cover;
+}
+
+/* if the screen gets too small height, change to percentage */
+@media screen and (max-height: 600px)
+{
+    #home>header {
+        height: 70vh;
+    }
+}
+
+/* use h1 to move down the text */
+#home h1 {
+    padding-top: 25vh;
+}
+
+#home p {
+    width: 40%; 
+    margin: auto;
+    position: center;       /* position the box in the middle */
+    text-align: center;     /* position the text in the middle of the box */
+    /*line-height: 1.5;*/
+    color: black;
+    font-size: 3.0em;
+    text-shadow: 2px 2px white;
+}
+
+/* move the text below the eyes of the picture and decrease the size somewhat */
+@media screen and (max-height: 500px)
+{
+    #home h1 {
+        padding-top: 20vh;
+    }
+}
+
+@media screen and (max-width: 500px)
+{
+    #home p {
+        font-size: 2.4em;
+    }    
+}
+
+/****** about section *********/
+
+/*
+Design: 
+On desktop, make it fill the whole screen together with the home picture (60vh, 40vh).
+On mobile devices, extend below the viewport.
+Achieve this using min-height.
+*/
+
+#h1about {
+	color: #5F7F92;
+}
+
+#about
+{   
+    /* flex container */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+#about p {
+    padding-left: 6em;
+    padding-right: 6em;    
+    padding-bottom: 1.6em;
+    font-size: 14px;  
+    text-align: center;
+	color: #555555;
+}
+
+/* resize for smaller screens */
+@media screen and (max-width: 600px) {
+   #about>div p {
+       padding-left: 3em;
+       padding-right: 3em;
+        font-size: 12px;
+    }    
+}
+
+
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations border: */
+
+/* http://justinaguilar.com/animations/# */
+
+@keyframes slidein {
+    0% {
+        margin-left: 100%;
+        width: 300%;
+    }
+    100% {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+.slide {
+    visibility: visible;
+    animation-duration: 10s;
+    animation-name: slidein;
+}
+
+
+#test {
+    visibility: visible;
+}
+
+
+/******** footer **********/
+
+/*footer has a fixed hight of 100px
+  the width is adjusted to the screen width
+  in order to achieve vertical centering of the text the line-height is set to the height of the footer
+  in order to achieve horizontal centering the text-align is set to center*/
+#footer {
+	background-color: #2b2b2b;
+	height: 100px;
+	text-align: center;
+	font-size: 20px;
+	line-height: 100px;
+}
+
+#footer h4 {
+	color: white;
+}
+
+#footer a {
+	color: #2e80d0;
+	text-decoration: none;
+}
+
+/*added this to resize the titles if screen with is very small*/
+@media screen and (max-width: 400px) {
+	.h1centered {
+		font-size: 2.2em;
+	}
+}
