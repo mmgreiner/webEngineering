@@ -235,10 +235,13 @@ Achieve this using min-height.
 
 .slide {
     visibility: visible;
-    animation-duration: 10s;
+    animation-duration: 4s;
     animation-name: slidein;
 }
 
+.animate {
+    visibility: visible;
+}
 
 #test {
     visibility: visible;

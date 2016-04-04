@@ -28,6 +28,27 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <!-- <script src="./scripts/animation.js"></script> -->
+<script>
+
+    $(document).ready(function() {
+        $(".animate").each(function() {
+            var elem = $(this).get()[0];
+           console.log("elem " + elem.nodeName + " " + elem.id); 
+        });
+    $(window).scroll(function() {
+        $(".animate").each(function() {
+            var imagePos = $(this).offset().top;
+            var topOfWindow = $(window).scrollTop();
+            var height = $(window).innerHeight();
+            console.log("hit scrolling " + imagePos + " " + topOfWindow + " " + height);
+            if (imagePos < topOfWindow+height) {
+                $(this).addClass("slide");
+            }
+        })
+    })
+    })
+    </script>
+
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#navbar-main">
@@ -60,9 +81,9 @@
     <!-- ==== ABOUT ==== -->
     <section id="about">
         <br>
-        <h1 class="h1centered" id="h1about">A LITTLE ABOUT MY SELF</h1>
+        <h1 class="h1centered animate" id="h1about">A LITTLE ABOUT MY SELF</h1>
         <hr>
-        <div>
+        <div class="slide">
 
             <p>I am a UX/UI Designer and Front End developer from Zurich, Switzerland. I love to solve complex problem, create
                 new and simple design solution for different topics. I create beautiful, usable, professional websites using
@@ -82,13 +103,14 @@
         </div>
     </section>
 
-<p id="test">This is a test line</p>
+<p id="test" class="animate">This is a test line</p>
 
     <!-- ==== FOOTER ==== -->
     <footer id="footer">
         <h4>Created by <a href="http://globis.co">globis</a> </h4>
     </footer>
 
+<!--
 <script>
     $(window).scroll(function() {
         $("#test").each(function() {
@@ -102,6 +124,7 @@
         })
     })
     </script>
+    -->
 </body>
 
 </html>
