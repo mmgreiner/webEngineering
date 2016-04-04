@@ -44,6 +44,7 @@ body {
 	/*font-family: Lato;*/
     font-size: 62.5%;
     line-height: 1.2;
+    overflow-y: scroll;
 }
 
 /* standard paragraph font size */
@@ -51,11 +52,31 @@ p {
     font-size: 1.6em;
 }
 
-/* class used to animate 
-Doesn't work, is not called ? */
-.animator p {
-    display: none;
+/******* animation *********/
+
+@keyframes slidein {
+    0% {
+        margin-left: 100%;
+        width: 300%;
+    }
+    100% {
+        margin-left: 0%;
+        width: 100%;
+    }
 }
+
+.slide {
+    visibility: visible;
+    animation-duration: 4s;
+    animation-name: slidein;
+}
+
+.animate {
+    visibility: visible;
+}
+
+/* ******** end animation **********/
+
 
 .h1centered {
 	text-align: center;
@@ -124,6 +145,19 @@ The menu items are left adjusted.
 	color: #fff;
 	font-size: 20px;
 }
+
+/* added from Andrea */
+.nav img{
+    display: block;
+    width: 48px;
+    margin: auto;
+}
+
+.nav a{
+    text-align: center;
+    font-size: 1em;
+}
+
 
 /* decrease font for mobile
 Width:
@@ -239,6 +273,25 @@ Achieve this using min-height.
        padding-right: 3em;
         font-size: 12px;
     }    
+}
+
+/*
+#about div.slide {
+    left: -100px;
+}
+#about:hover div.slide {
+    transition: 3s linear;
+    left: 0;
+}
+*/
+@keyframes slide-right {
+    0% { left: -100px;}
+    100% { left: 0px; }
+}
+
+#about:hover div.slide {
+    animation-name: slide-right;
+    animation-duration: 5s;
 }
 
 /******* part designer section **********/
