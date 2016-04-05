@@ -7,7 +7,10 @@ Animate first time, if a DOM element appears in the current view port
 When the page loads, the elements appear on the screen
 on scrolling, also once they appear.
 
+Adopted from: http://justinaguilar.com/animations/
 */
+
+"use strict";
 
 $(document).ready(function() {
     $(".animate").each(function() {

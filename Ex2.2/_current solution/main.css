@@ -51,11 +51,31 @@ p {
     font-size: 1.6em;
 }
 
-/* class used to animate 
-Doesn't work, is not called ? */
-.animator p {
-    display: none;
+/*********** animation *************/
+
+@keyframes slidein {
+    0% {
+        margin-left: 100%;
+        width: 300%;
+    }
+    100% {
+        margin-left: 0%;
+        width: 100%;
+    }
 }
+
+.slide {
+    visibility: visible;
+    animation-duration: 4s;
+    animation-name: slidein;
+}
+
+.animate {
+    visibility: visible;
+}
+
+
+/*********** end animation *********/
 
 .h1centered {
 	text-align: center;
