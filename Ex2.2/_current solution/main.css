@@ -51,31 +51,6 @@ p {
     font-size: 1.6em;
 }
 
-/*********** animation *************/
-
-@keyframes slidein {
-    0% {
-        margin-left: 100%;
-        width: 300%;
-    }
-    100% {
-        margin-left: 0%;
-        width: 100%;
-    }
-}
-
-.slide {
-    visibility: visible;
-    animation-duration: 4s;
-    animation-name: slidein;
-}
-
-.animate {
-    visibility: visible;
-}
-
-
-/*********** end animation *********/
 
 .h1centered {
 	text-align: center;
@@ -1034,12 +1009,17 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	}
 }
 
-/******** animations **********/
 
-@keyframes slidein {
+/*********** animation *************/
+
+@keyframes slideLeft {
     0% {
         margin-left: 100%;
         width: 300%;
+    }
+    95% {
+        margin-left: -10%;
+        width: 100%;
     }
     100% {
         margin-left: 0%;
@@ -1047,16 +1027,97 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
     }
 }
 
+@keyframes slideRight {
+    0% {
+        margin-right: 100%;
+        width: 300%;
+    }
+    95% {
+        margin-right: -10%;
+        width: 100%;
+    }
+    100% {
+        margin-right: 0%;
+        width: 100%;
+    }
+}
+
+@keyframes slideDown {
+	0% {
+		transform: translateY(-100%);
+	}
+	50%{
+		transform: translateY(8%);
+	}
+	65%{
+		transform: translateY(-4%);
+	}
+	80%{
+		transform: translateY(4%);
+	}
+	95%{
+		transform: translateY(-2%);
+	}			
+	100% {
+		transform: translateY(0%);
+	}		
+}
+
+@keyframes slideUp {
+	0% {
+		transform: translateY(100%);
+	}
+	50%{
+		transform: translateY(-8%);
+	}
+	65%{
+		transform: translateY(4%);
+	}
+	80%{
+		transform: translateY(-4%);
+	}
+	95%{
+		transform: translateY(2%);
+	}			
+	100% {
+		transform: translateY(0%);
+	}	
+}
+
+
 .slide {
     visibility: visible;
     animation-duration: 4s;
-    animation-name: slidein;
+    animation-name: slideLeft;
+}
+
+.slide1 {
+    visibility: visible;
+    animation-duration: 4s;
+    animation-name: slideLeft;
+}
+
+.slide2 {
+    visibility: visible;
+    animation-duration: 4s;
+    animation-name: slideRight;
+}
+
+.slide3 {
+    visibility: visible;
+    animation-duration: 4s;
+    animation-name: slideUp;
+}
+
+.slide4 {
+    visibility: visible;
+    animation-duration: 4s;
+    animation-name: slideDown;
 }
 
 .animate {
     visibility: visible;
 }
 
-#test {
-    visibility: visible;
-}
+
+/*********** end animation *********/
