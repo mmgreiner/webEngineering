@@ -98,6 +98,7 @@ $(window).scroll(function () {
     var scrollTop = $(document).scrollTop();
 
     var currentId = getCurrentSection(scrollTop);
+    console.log("currentId" + currentId);
 
     startTimer(currentId, function(){
 

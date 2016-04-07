@@ -901,7 +901,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 /* divs for contact information have a fixed size and some margin */
 .contact {
 	width: 350px;
-	margin: 10px 10px 10px 10px;
+	margin: 40px 10px 40px 10px;
 }
 
 /* style for titles */
@@ -984,7 +984,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
   in order to achieve horizontal centering the text-align is set to center*/
 #footer {
 	background-color: #2b2b2b;
-	height: 100px;
+	height: 120px;
 	text-align: center;
 	font-size: 20px;
 	line-height: 100px;
