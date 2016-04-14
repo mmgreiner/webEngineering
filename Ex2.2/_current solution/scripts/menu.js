@@ -82,10 +82,10 @@ function getCurrentSection(scrollTop){
     else if(scrollTop > getHeightDivisions($("#portfolio"))  && scrollTop < getHeightDivisions($("#blog"))){
         return "#portfolio";
     }
-    else if(scrollTop > getHeightDivisions($("#blog"))  && scrollTop < getHeightDivisions($("#contact"))){
+    else if(scrollTop > getHeightDivisions($("#blog"))  && scrollTop < getHeightDivisions($("#crafted"))){
         return "#blog";
     }
-    else if(scrollTop > getHeightDivisions($("#contact"))){
+    else if(scrollTop > getHeightDivisions($("#crafted"))){
         return "#contact";
     }
     else {
