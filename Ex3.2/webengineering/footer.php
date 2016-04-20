@@ -8,7 +8,7 @@
 			<div id="contactInner">
 				<section class="contact">
 					<h3>Contact Information</h3>
-					<p>Paradeplatz, Zurich
+					<!--<p>Paradeplatz, Zurich
 						<br/>
 						+0041 9884 4893
 						<br/>
@@ -19,6 +19,20 @@
 						<a href="#"> @mrdesignrobot </a>
 						<br/>
 						<a href="#"> Mr Design Luigi</a>
+						<br/>
+					</p>-->
+					<p>
+						<?php echo get_theme_mod( 'address', 'unknown' ); ?>
+						<br/>
+						<?php echo get_theme_mod( 'phone', 'unknown' ); ?>
+						<br/>
+						<?php echo get_theme_mod( 'fax', 'unknown' ); ?>
+						<br/>
+						<a href="#"><?php echo get_theme_mod( 'mail1', 'unknown' ); ?></a>
+						<br/>
+						<a href="#"><?php echo get_theme_mod( 'mail2', 'unknown' ); ?></a>
+						<br/>
+						<a href="#"><?php echo get_theme_mod( 'company', 'unknown' ); ?></a>
 						<br/>
 					</p>
 				</section>

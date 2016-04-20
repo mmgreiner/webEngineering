@@ -15,6 +15,8 @@
 add_action( 'admin_init', 'theme_options_init' );
 add_action( 'admin_menu', 'theme_options_add_page' );
 
+include 'custom_posttype.php';
+
 // Register settings (http://codex.wordpress.org/Function_Reference/register_setting)
 function theme_options_init(){
 	register_setting( 'mam_options', 'mam_theme_options', 'mam_validate_options' );
@@ -88,3 +90,239 @@ function mam_validate_options( $input ) {
 	// $input['websitedescription'] = wp_filter_nohtml_kses( $input['websitedescription'] );
 	return $input;
 }
+
+// theme customization through theme customizer
+// Links
+// http://themefoundation.com/wordpress-theme-customizer/
+// https://codex.wordpress.org/Theme_Customization_API
+function mam_customize_technical_skills( $wp_customize ) {
+	
+	// add a new section to the customizer
+	$wp_customize->add_section(
+        'technical_skills_section',
+        array(
+            'title' => 'Technical Skills Settings',
+            'description' => 'Section to customize the technical skills.',
+            'priority' => 1,
+        )
+    );
+	
+	// add a new setting for html percentage
+	$wp_customize->add_setting(
+		'html_percentage',
+		array(
+			'default' => '0',
+		)
+	);
+
+	// add new control for html percentage
+	$wp_customize->add_control(
+		'html_percentage',
+		array(
+			'label' => 'HTML Percentage',
+			'section' => 'technical_skills_section',
+			'type' => 'text',
+		)
+	);
+	
+	// add a new setting for css percentage
+	$wp_customize->add_setting(
+		'css_percentage',
+		array(
+			'default' => '0',
+		)
+	);
+
+	// add new control for css percentage
+	$wp_customize->add_control(
+		'css_percentage',
+		array(
+			'label' => 'CSS Percentage',
+			'section' => 'technical_skills_section',
+			'type' => 'text',
+		)
+	);
+
+	// add a new setting for javascript percentage
+	$wp_customize->add_setting(
+		'js_percentage',
+		array(
+			'default' => '0',
+		)
+	);
+
+	// add new control for javascript percentage
+	$wp_customize->add_control(
+		'js_percentage',
+		array(
+			'label' => 'JavaScript Percentage',
+			'section' => 'technical_skills_section',
+			'type' => 'text',
+		)
+	);
+	
+	// add a new setting for wordpress percentage
+	$wp_customize->add_setting(
+		'wp_percentage',
+		array(
+			'default' => '0',
+		)
+	);
+
+	// add new control for wordpress percentage
+	$wp_customize->add_control(
+		'wp_percentage',
+		array(
+			'label' => 'WordPress Percentage',
+			'section' => 'technical_skills_section',
+			'type' => 'text',
+		)
+	);
+}
+
+add_action( 'customize_register', 'mam_customize_technical_skills' );
+
+//include custom css into header
+function mam_theme_customize_css()
+{
+	?>
+        <style type="text/css">
+			#barhtml { height: <?php echo 300*(floatval(get_theme_mod('html_percentage', '0'))/100); ?>px }
+			#barcss  { height: <?php echo 300*(floatval(get_theme_mod('css_percentage', '0'))/100); ?>px }
+			#barjs   { height: <?php echo 300*(floatval(get_theme_mod('js_percentage', '0'))/100); ?>px }
+			#barwp   { height: <?php echo 300*(floatval(get_theme_mod('wp_percentage', '0'))/100); ?>px }
+        </style>
+    <?php
+}
+
+add_action( 'wp_head', 'mam_theme_customize_css');
+
+// make sure that there is no margin put into the css for the admin bar
+// Link: http://stackoverflow.com/questions/6053654/why-is-the-php-wp-head-tag-creating-a-top-margin-at-the-top-of-my-theme-hea
+function my_function_admin_bar(){ return false; }
+add_filter( 'show_admin_bar' , 'my_function_admin_bar');
+
+// contact customization through theme customizer
+function mam_customize_contact( $wp_customize ) {
+	
+	// add a new section to the customizer
+	$wp_customize->add_section(
+        'contact_section',
+        array(
+            'title' => 'Contact Settings',
+            'description' => 'Section to customize the contact information.',
+            'priority' => 1,
+        )
+    );
+	
+	// add a new setting for address
+	$wp_customize->add_setting(
+		'address',
+		array(
+			'default' => 'unknown',
+		)
+	);
+
+	// add new control for address
+	$wp_customize->add_control(
+		'address',
+		array(
+			'label' => 'Address',
+			'section' => 'contact_section',
+			'type' => 'text',
+		)
+	);
+	
+	// add a new setting for phone
+	$wp_customize->add_setting(
+		'phone',
+		array(
+			'default' => 'unknown',
+		)
+	);
+
+	// add new control for phone
+	$wp_customize->add_control(
+		'phone',
+		array(
+			'label' => 'Phone',
+			'section' => 'contact_section',
+			'type' => 'text',
+		)
+	);
+	
+	// add a new setting for fax
+	$wp_customize->add_setting(
+		'fax',
+		array(
+			'default' => 'unknown',
+		)
+	);
+
+	// add new control for fax
+	$wp_customize->add_control(
+		'fax',
+		array(
+			'label' => 'Fax',
+			'section' => 'contact_section',
+			'type' => 'text',
+		)
+	);
+	
+	// add a new setting for mail line 1
+	$wp_customize->add_setting(
+		'mail1',
+		array(
+			'default' => 'unknown',
+		)
+	);
+
+	// add new control for mail line 1
+	$wp_customize->add_control(
+		'mail1',
+		array(
+			'label' => 'Mail Line 1',
+			'section' => 'contact_section',
+			'type' => 'text',
+		)
+	);
+
+	// add a new setting for mail line 2
+	$wp_customize->add_setting(
+		'mail2',
+		array(
+			'default' => 'unknown',
+		)
+	);
+
+	// add new control for mail line 2
+	$wp_customize->add_control(
+		'mail2',
+		array(
+			'label' => 'Mail Line 2',
+			'section' => 'contact_section',
+			'type' => 'text',
+		)
+	);
+	
+	// add a new setting for company
+	$wp_customize->add_setting(
+		'company',
+		array(
+			'default' => 'unknown',
+		)
+	);
+
+	// add new control for company
+	$wp_customize->add_control(
+		'company',
+		array(
+			'label' => 'Company',
+			'section' => 'contact_section',
+			'type' => 'text',
+		)
+	);
+}
+
+add_action( 'customize_register', 'mam_customize_contact' );
+

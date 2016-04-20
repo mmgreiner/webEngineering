@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <!--<title> J. O. Rob main page</title>-->
 	<title><?php echo get_option('mam_theme_options')['websitetitle']; ?></title>	
-    <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
+	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>	
 	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/menu.js"></script>
 	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/animation.js"></script>
 	<script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/portfolio.js"></script>
+    <script type="text/javascript" src="<?php bloginfo('template_url'); ?>/js/ajax.js"></script>
+	<?php wp_head();?>
 </head>
 
 <body data-spy="scroll" data-offset="0" data-target="#navbar-main">

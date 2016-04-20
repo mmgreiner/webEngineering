@@ -389,7 +389,7 @@ Achieve this using min-height.
 .portfolioCat {
 	background-color: #808080;
 	/*display: inline-block;*/
-	width: 120px;
+	/* width: 160px; */
 	color: white;
 	text-align: center;
 	height: 40px;
@@ -397,6 +397,7 @@ Achieve this using min-height.
     line-height: 40px;
 	margin: 0px 25px 0px 25px;
 	font-size: 1.4em;
+    cursor: pointer;
 	/*outline: 1px solid red;*/
 }
 
@@ -723,10 +724,32 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	line-height: 20px;
 }
 
+/*
 .blogtext a {
 	color: #2e80d0;
 	text-decoration: none;
 }
+*/
+
+/********/
+.blogpreview span {
+	font-size: 12px;
+	color: #2e80d0;
+	text-decoration: none;
+	position: absolute;
+	bottom: 5px;
+    cursor: pointer;
+}
+
+.blogtext span {
+	color: #2e80d0;
+    font-size: 14px;
+	margin-left:  10px;
+    cursor: pointer;
+}
+
+
+/**********/
 
 #blogpreviews {
     display: flex;
@@ -797,6 +820,7 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	font-size: 5px;
 }
 
+/*
 .blogpreview a {
 	font-size: 12px;
 	color: #2e80d0;
@@ -804,6 +828,29 @@ flex: 0 1 auto   - flex-grow flex-shrink flex-basis;
 	position: absolute;
 	bottom: 5px;
 }
+*/
+
+#blogdetails {
+    position: relative;
+    margin-left: 10em;
+    margin-right: 10em;
+}
+
+#blogdetails aside.blogauthor{
+    height: 100%;
+    position: absolute;
+}
+
+#blogdetails section.blogtext{
+    height: 100%;
+    width: 87%;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 4em;
+    margin-bottom: 0;
+    margin-left: 112px;
+}
+
 
 /* for screens with less width than 450px we make divs of flexible width to avoid horizontal scrolling
    in addition the height is set to auto in order to avoid text-overflow */

@@ -3,6 +3,7 @@
 
 function toggleVisiblePortfolioProjects(portfolioCategory) {
 	$("#portfolioSelected").attr("id", "portfolioNotSelected");
+    console.log("portCategory.name = " + $(portfolioCategory).attr("name"));
 	$(portfolioCategory).attr("id","portfolioSelected");
 	$(".portfolioFigure").each(function() {
 		$(this).css("display", "inline-block");
