@@ -64,28 +64,40 @@ function add_portfolio_posttype_metabox() {
     add_meta_box('portfolio_metabox', 'Portfolio Data', 'portfolio_metabox', 'portfolio', 'normal');
 }
 
+function get_custompost_metabox($id, $label) {
+    $ret = '';
+    $custom = get_pos_custom($id);
+    if ($custom && count($custom) > 0) {
+        $ret = $custom[$label][0];
+    }
+    return $ret;
+}
+
 function portfolio_metabox() {
     global $post;           // current post in "the loop"
-    echo $post->ID . " " . $post->post_title;
+    // echo $post->ID . " " . $post->post_title;
     
-    // this stuff is written to wp_postmeta with met_key = 'project_name' and the value, etc.
+    // this stuff is written to wp_postmeta with met_key = 'project_diff' and the value, etc.
+    
     $custom = get_post_custom($post->ID);
-    $project_name = $custom['project_name'][0];
-    $port_type = $custom['port_type'][0];
+    $project_diff = $custom['project_diff'][0];
+    
+    //$project_diff = get_custompost_metabox($post->ID, 'project_diff');
     /*
+    $port_type = $custom['port_type'][0];
     $thumbnail = $custom['thumbnail'][0];
     $description = $custom['description'][0]; 
     */
 ?>
     
     <div class='portfolio'>
-        <p> <label>Project Name<br><input type="text" name ="project_name" size="50"
-            value="<?php echo $project_name; ?>"> </label>
+        <p> <label>Project difficulty<br><input type="text" name ="project_diff" size="50"
+            value="<?php echo $project_diff; ?>"> </label>
         </p>
+        <!--
         <p> <label>Portfolio Type<br><input type="text" name ="port_type" size="50"
             value="<?php echo $port_type; ?>"> </label>
         </p>
-        <!--
         <p> <label>Thumbnail<br><input type="text" name ="thumbnail" size="50"
             value="<?php echo $thumbnail; ?>"> </label>
         </p>
@@ -98,14 +110,12 @@ function portfolio_metabox() {
 
 function portfolio_post_save_meta ($post_id, $post) {
     // editing allowed?
+    global $post;
     if ( ! current_user_can( 'edit_post', $post->ID )) {
         return $post->ID;
     }
     
-    $portfolio_post_meta['project_name'] = $_POST['project_name'];
-    $portfolio_post_meta['port_type'] = $_POST['port_type'];
-    $portfolio_post_meta['thumbnail'] = $_POST['thumbnail'];
-    $portfolio_post_meta['description'] = $_POST['description'];
+    $portfolio_post_meta['project_diff'] = $_POST['project_diff'];
     
     // add values as custom fields
     foreach ($portfolio_post_meta as $key => $value) {
@@ -124,8 +134,10 @@ function portfolio_post_save_meta ($post_id, $post) {
 
 add_action('save_post', 'portfolio_post_save_meta', 1, 2);     // priority, nof args
 
+
 // taken from: https://developer.wordpress.org/reference/functions/get_the_terms/
 
+// return the category of the selected post id
 function the_portfolio_category( $id = false ) {
     $terms = get_the_terms(get_the_ID(), 'custom_category');
     if ( $terms && ! is_wp_error($terms)) {
@@ -140,6 +152,7 @@ function the_portfolio_category( $id = false ) {
     return '';
 } 
 
+// get all categories, either als array or as string
 function get_portfolio_categories($asString = false) {
     $categories = get_categories( [
         'taxonomy' => 'custom_category',

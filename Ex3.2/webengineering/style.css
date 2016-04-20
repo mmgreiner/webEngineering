@@ -398,6 +398,7 @@ Achieve this using min-height.
 	margin: 0px 25px 0px 25px;
 	font-size: 1.4em;
     cursor: pointer;
+	padding: 0px 10px;		/* top-buttom left-right */
 	/*outline: 1px solid red;*/
 }
 
@@ -626,7 +627,7 @@ Achieve this using min-height.
 }
 
 .container p{
-    font-size: 1em;
+    font-size: 1.4em;
     padding-top: 1em;
     margin-left: -0.6em;
 }
