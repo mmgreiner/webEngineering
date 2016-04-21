@@ -100,7 +100,7 @@ endwhile;
                             <h2 class="popup-h2"><?php the_title(); echo ' / ' . $category?></h2>
                         </header>
                         <div class="container">
-                            <?php echo get_the_post_thumbnail(get_the_ID() /*, [600, 400] ['class' => 'image-popup']*/);?> 
+                            <?php echo get_the_post_thumbnail(get_the_ID(), [300, 400] /*['class' => 'image-popup']*/);?> 
                             <!-- <img src="<?php bloginfo('template_url'); ?>/assets/img/portfolio/folio01.jpg" alt="" class="image-popup"> -->
                             <p><?php the_content(); ?></p>
                         </div>
@@ -135,7 +135,7 @@ while ($myPosts->have_posts()): $myPosts->the_post();
                 <aside class="blogauthor">
                     <br>
                     <p><img src="<?php bloginfo('template_url'); ?>/assets/img/team/u1.jpg" width="60px" height="60px"></p>
-                    <h4><?php the_author(); ?></h4>
+                    <h4><?php the_author_meta('first_name'); echo ' '; the_author_meta('last_name'); ?></h4>
                     <h5><?php the_date(); ?></h5>
                 </aside>
                 <!--

@@ -426,7 +426,7 @@ Achieve this using min-height.
    they are shown on multiple lines -> this is achieved by setting flex-wrap: wrap
    in general all projects are horizontally aligned in the middle
 */
-#porfolioProjects {
+#portfolioProjects {
 	margin: 20px 0px 0px 0px;
 	text-align: center;
 	display: flex;
@@ -621,9 +621,10 @@ Achieve this using min-height.
 }
 
 .container img{
-    width: 100%;
+    /* width: 100%; */
     position: relative;
     margin-top: -1em;
+	margin: auto;
 }
 
 .container p{
