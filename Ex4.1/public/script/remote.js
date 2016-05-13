@@ -1,0 +1,86 @@
+var currentImage = 0; // the currently selected image
+var imageCount = 7; // the maximum number of images available
+var socket;
+
+function showImage (index){
+    // Update selection on remote
+    currentImage = index;
+    var images = document.querySelectorAll("img");
+    document.querySelector("img.selected").classList.toggle("selected");
+    images[index].classList.toggle("selected");
+
+    // Send the command to the screen
+    // TODO
+    //alert("TODO send the index to the screen")
+
+	socket.emit('selected image', index);
+}
+
+function initialiseGallery(){
+    var container = document.querySelector('#gallery');
+    var i, img;
+    for (i = 0; i < imageCount; i++) {
+        img = document.createElement("img");
+        img.src = "images/" +i +".jpg";
+        document.body.appendChild(img);
+        var handler = (function(index) {
+            return function() {
+                showImage(index);
+            }
+        })(i);
+        img.addEventListener("click",handler);
+    }
+
+    document.querySelector("img").classList.toggle('selected');
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    initialiseGallery();
+
+    document.querySelector('#toggleMenu').addEventListener("click", function(event){
+        var style = document.querySelector('#menu').style;
+        style.display = style.display == "none" || style.display == ""  ? "block" : "none";
+    });
+    connectToServer();
+});
+
+function connectToServer(){
+    // TODO connect to the socket.io server
+	
+	socket = io();
+	
+	socket.on('screens', function(screens){
+		
+		//first clear menu
+		$('#menu').empty();
+		
+		//populate menu with screens
+		for (i = 0; i < screens.length; i++) { 
+			//$('#menu').append($('<li>').text(screens[i]));
+			var screenId = screens[i][0];
+			/*console.log(screenId);
+			console.log(screenName);
+			console.log(screens[i][2]);*/
+			var screenName = screens[i][1];
+			var buttonText = "connect";
+			if(screens[i][2] === 'connected') {
+				var buttonText = "disconnect";	
+			}
+			//$('#menu').append($('<li>'+screenName+'<input type="button" id=screenIndex'+i+' value='+buttonText+' onclick="changeConnectionInfo('+i+')"/>'));
+			$('#menu').append($('<li>'+screenName+'<button id=screenIndex'+i+' onclick="changeConnectionInfo('+i+')">'+buttonText+'</button>'));
+		}
+	});
+}
+
+function changeConnectionInfo(screenIndex) {
+	//console.log(screenIndex);
+	var currentValue = $("#screenIndex" + screenIndex).html();
+	//console.log(currentValue);
+	if(currentValue == 'connect') {
+		$("#screenIndex" + screenIndex).html('disconnect');
+	} else {
+		$("#screenIndex" + screenIndex).html('connect');
+	}
+	
+	socket.emit('connection changed', screenIndex);
+}
