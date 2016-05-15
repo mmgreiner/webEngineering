@@ -16,10 +16,6 @@ http.listen(8080, function(){
     console.log('listening on *:8080');
 });
 
-var screens = [];				//collection of screens
-var remotes = [];				//collection of remotes
-var currentImageIndex = 0;		//keeps track of the current image index (initially set to 0)
-
 //listen on the connection event for incoming sockets
 io.on('connection', function(socket){
 	
@@ -28,50 +24,66 @@ io.on('connection', function(socket){
 	console.log('user connected: ' + name + ' / id: ' + socket.id);	
 	
 	//screens have names like screen1, screen2, etc.
-	//remotes don't forward a name -> name is undefined
-	if(typeof name === 'undefined') {
-		remotes.push(socket);
+	//remotes have remote as name
+	if(name.includes("remote")) { 
+		//store default image index in nickname and join room with all remotes
+		socket.nickname = 0;
 		socket.join('remotes');
-	} else {
-		screens.push([socket, 'disconnected']);
+	} else if(name.includes("screen")) {
+		//store name in attribute nickname and join room with all screens
+		socket.nickname = name;
 		socket.join('screens');
+		//clear screen
+		io.sockets.connected[socket.id].emit('image index', -1);
 	}
 		
 	//disconnect event
 	socket.on('disconnect', function(){
-		if(typeof name != 'undefined') {
-			var index = screens.findIndex(x => x[0].id == socket.id);
-			console.log('user disconnected: ' + name + ' with array index ' + index);
-			screens.splice(index, 1);
-			
-			//forward updated list to remote and image index to all connected screens
-			forwardSocketNamesToRemoteControl();
-			forwardPicturesToScreens();
+		console.log('user disconnected: ' + name);
+		if(name.includes("remote")) {
+			//need to clean up all screens connected by this remote
+			var remoteRoom = io.nsps['/'].adapter.rooms[socket.id];
+			if(remoteRoom != undefined) {
+				for (var screenSocketId in remoteRoom.sockets) {
+					if(screenSocketId != socket.id) {
+						console.log('screen is cleared');
+						io.sockets.connected[screenSocketId].emit('image index', -1);
+					}
+				}
+			}
 		}
+			
+		//forward updated list of screens to remote
+		forwardSocketNamesToRemoteControl();
 	});
 	
 	//selected image index event
-	socket.on('selected image', function(index){
-		console.log('selected image index: ' + index);
-		currentImageIndex = index;
+	socket.on('selected image', function(imageIndex){
+		console.log('selected image changed');
+		//keep track of currently selected image in attribute nickname of remote
+		socket.nickname = imageIndex;
 		
-		//forward updated list to remote and image index to all connected screens
-		forwardSocketNamesToRemoteControl();
-		forwardPicturesToScreens();
+		//forward image index to all connected screens
+		forwardPicturesToScreens(socket.id);
 	});
 	
 	//event if a connection information of a screen has changed
-	socket.on('connection changed', function(index){
-		console.log("connection change: " + index);
-		var lastStatus = screens[index][1];
-		if(lastStatus == 'connected') {
-			screens[index][1] = 'disconnected';
-		} else {
-			screens[index][1] = 'connected';
-		}
+	socket.on('connection changed', function(screenId){
+		console.log('status update for remote ' + socket.id + ' and screen ' + screenId);
+		var status = 'disconnected';
+		//if screen is in room of remote => leave room
+		if (io.sockets.adapter.sids[screenId][socket.id]) {
+			console.log('leave');
+			io.sockets.connected[screenId].leave(socket.id);
+			
+			//in addition we need to clear the display of the screen
+			io.sockets.connected[screenId].emit('image index', -1);
+		} else { //otherwise join
+			console.log('join');
+			io.sockets.connected[screenId].join(socket.id);
+		} 
 		
-		//forward updated list to remote and image index to all connected screens
-		forwardSocketNamesToRemoteControl();
+		//forward image index to all connected screens
 		forwardPicturesToScreens();
 	});
 	
@@ -82,26 +94,69 @@ io.on('connection', function(socket){
 
 //function to update the list with screens on the remote control
 function forwardSocketNamesToRemoteControl() {
-	screenNames = [];
-	console.log("Overview:");
-	for (i = 0; i < screens.length; i++) { 
-		console.log(screens[i][0].id + " " + screens[i][0].handshake.query.name + " " + screens[i][1]);
-		screenNames.push([screens[i][0].id, screens[i][0].handshake.query.name, screens[i][1]]);
+	console.log('forward list with sockets to remotes');
+	//get the rooms for all remotes and iterate them
+	var remotesRoom = io.nsps['/'].adapter.rooms['remotes'];
+	if(remotesRoom != undefined) {
+		for (var remoteSocketId in remotesRoom.sockets) {
+			screenNames = [];
+			//iterate over all screens in the screen-room
+			//and check whether they are in the current remote room
+			//if this is the case add the screen to screenNames
+			var screenRoom = io.nsps['/'].adapter.rooms['screens'];
+			if(screenRoom != undefined) {
+				for (var screenSocketId in screenRoom.sockets) {
+					var status = 'disconnected';
+					if (io.sockets.adapter.sids[screenSocketId][remoteSocketId]) {
+						status = 'connected';
+					}
+					screenNames.push([screenSocketId, io.sockets.connected[screenSocketId].nickname, status]);
+				}	
+				//forward list with screen names to the remote
+				io.sockets.connected[remoteSocketId].emit('screens', screenNames);
+			}
+		}
 	}
-	io.to('remotes').emit('screens', screenNames);
 }
 
 //function to forward the image index to the screens
-function forwardPicturesToScreens() {
-	var activeScreensCounter = 0;
-	for (i = 0; i < screens.length; i++) {
-		console.log('image with index ' + (currentImageIndex + i) + ' will be sent');
-		//only forward image index to screens that are currently connected
-		if(screens[i][1] === 'connected') {
-			io.sockets.connected[screens[i][0].id].emit('image index', (currentImageIndex + activeScreensCounter));
-			activeScreensCounter = activeScreensCounter + 1;
-		} else {
-			io.sockets.connected[screens[i][0].id].emit('image index', -1);
-		}
+function forwardPicturesToScreens(remoteSocketId) {
+	console.log('forward picture to screens');
+	//if remoteSocketId specified -> update all connected screens of that remote
+	if (remoteSocketId != undefined) {
+		var remotesRoom = io.nsps['/'].adapter.rooms[remoteSocketId];
+	//otherwise update all screenSocketId
+	} else { 
+		var remotesRoom = io.nsps['/'].adapter.rooms['remotes'];
 	}
+	if(remotesRoom != undefined) {
+		/*for (var remoteSocketId in remotesRoom.sockets) {
+			var activeScreensCounter = 0;
+			var remoteRoom = io.nsps['/'].adapter.rooms[remoteSocketId];
+			if(remoteRoom != undefined) {
+				for (var screenSocketId in remoteRoom.sockets) {
+					if(screenSocketId != remoteSocketId) {
+						var imageIndex = io.sockets.connected[remoteSocketId].nickname;
+						io.sockets.connected[screenSocketId].emit('image index', imageIndex + activeScreensCounter);
+						activeScreensCounter = activeScreensCounter + 1;
+					}
+				}
+			}
+		}*/
+		for (var remoteSocketId in remotesRoom.sockets) {
+			var activeScreensCounter = 0;
+			var screenRoom = io.nsps['/'].adapter.rooms['screens'];
+			if(screenRoom != undefined) {
+				for (var screenSocketId in screenRoom.sockets) {
+					if (io.sockets.adapter.sids[screenSocketId][remoteSocketId]) {
+						if(screenSocketId != remoteSocketId) {
+							var imageIndex = io.sockets.connected[remoteSocketId].nickname;
+							io.sockets.connected[screenSocketId].emit('image index', imageIndex + activeScreensCounter);
+							activeScreensCounter = activeScreensCounter + 1;
+						}
+					}
+				}	
+			}
+		}
+	}	
 }

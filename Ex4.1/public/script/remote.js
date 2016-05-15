@@ -1,6 +1,7 @@
 var currentImage = 0; // the currently selected image
 var imageCount = 7; // the maximum number of images available
 var socket;
+var currentScreenList;
 
 function showImage (index){
     // Update selection on remote
@@ -47,9 +48,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function connectToServer(){
     // TODO connect to the socket.io server
 	
-	socket = io();
+	//socket = io();
+	socket = io({query: "name=remote"});
 	
 	socket.on('screens', function(screens){
+		
+		currentScreenList = screens;
 		
 		//first clear menu
 		$('#menu').empty();
@@ -82,5 +86,6 @@ function changeConnectionInfo(screenIndex) {
 		$("#screenIndex" + screenIndex).html('connect');
 	}
 	
-	socket.emit('connection changed', screenIndex);
+	//socket.emit('connection changed', screenIndex);
+	socket.emit('connection changed', currentScreenList[screenIndex][0]);	
 }
