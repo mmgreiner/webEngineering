@@ -135,7 +135,6 @@ function forwardSocketNamesToRemoteControl() {
 //function to forward the image index to the screens
 function forwardPicturesToScreens(remoteSocketId) {
 	console.log('forward picture to screens');
-	console.log('test');
 	//if remoteSocketId specified -> update all connected screens of that remote
 	if (remoteSocketId != undefined) {
 		var remotesRoom = io.nsps['/'].adapter.rooms[remoteSocketId];
@@ -167,6 +166,7 @@ function forwardPicturesToScreens(remoteSocketId) {
 					if (io.sockets.adapter.sids[screenSocketId][remoteSocketId]) {
 						if(screenSocketId != remoteSocketId) {
 							var imageIndex = io.sockets.connected[remoteSocketId].nickname;
+							console.log("zooming " + imageIndex);
 							io.sockets.connected[screenSocketId].emit('image index', imageIndex + activeScreensCounter);
 							activeScreensCounter = activeScreensCounter + 1;
 						}
@@ -179,10 +179,31 @@ function forwardPicturesToScreens(remoteSocketId) {
 
 function performZoom(zoomLevel) {
     var activeScreensCounter = 0;
+	/*
     for (i = 0; i < screens.length; i++) {
         if(screens[i][1] === 'connected') {
             io.sockets.connected[screens[i][0].id].emit('image zoom', {id: (currentImageIndex + activeScreensCounter), zoomLevel: zoomLevel});
             activeScreensCounter += 1;
         }
     }
+	*/
+	/* Markus: I tried to adapt this from Michael's solution, but looks quite complex 
+	*/
+	var remotesRoom = io.nsps['/'].adapter.rooms['remotes'];
+	//console.log("performZoom ");
+	//console.log(remotesRoom);
+	for (var remotesSocketId in remotesRoom.sockets) {
+		var screenRoom = io.nsps['/'].adapter.rooms['screens'];
+		if (screenRoom) {
+			for (var screenSocketId in screenRoom.sockets) {
+				if (io.sockets.adapter.sids[screenSocketId][remotesSocketId]) {
+					if (screenSocketId != remoteSocketId) {
+						io.sockets.connected[screenSocketId].emit('image zoom', 
+							{id: (currentImageIndex + activeScreenCounter), zoomLevel: zoomLevel});
+							activeScreenCounter += 1;
+					}
+				}
+			}
+		}
+	} 
 }
