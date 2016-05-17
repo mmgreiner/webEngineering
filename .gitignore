@@ -1,0 +1,15 @@
+# nodejs express and socket.io
+Ex4.1/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/lib/index.js
+Ex4.1/node_modules/*
+# Unzipped file
+GalleryRemote_Skeleton/*
+# Visual Studio files
+.vscode/*
+
+*.db-shm
+
+Ex4.1/.vscode/.browse.VC.db
+
+*.db-wal
+
+Ex4.1/.vscode/launch.json
