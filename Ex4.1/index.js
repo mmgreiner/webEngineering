@@ -18,27 +18,30 @@ http.listen(8080, function(){
 
 //listen on the connection event for incoming sockets
 io.on('connection', function(socket){
-	
-	//get name of connected socket
-    var  name = socket.handshake.query.name;
+    
+    //get name of connected socket
+    var name = socket.handshake.query.name;
+	if (name === undefined) {
+		console.log("an older socket still running with wrong arguments, aborting");
+	}
 	console.log('user connected: ' + name + ' / id: ' + socket.id);	
-	
-	//screens have names like screen1, screen2, etc.
+    
+    //screens have names like screen1, screen2, etc.
 	//remotes have remote as name
 	if(name.includes("remote")) { 
 		//store default image index in nickname and join room with all remotes
 		socket.nickname = 0;
-		socket.join('remotes');
+        socket.join('remotes');
 	} else if(name.includes("screen")) {
 		//store name in attribute nickname and join room with all screens
 		socket.nickname = name;
 		socket.join('screens');
 		//clear screen
 		io.sockets.connected[socket.id].emit('image index', -1);
-	}
-		
-	//disconnect event
-	socket.on('disconnect', function(){
+    }
+        
+    //disconnect event
+    socket.on('disconnect', function(){
 		console.log('user disconnected: ' + name);
 		if(name.includes("remote")) {
 			//need to clean up all screens connected by this remote
@@ -63,11 +66,21 @@ io.on('connection', function(socket){
 		//keep track of currently selected image in attribute nickname of remote
 		socket.nickname = imageIndex;
 		
-		//forward image index to all connected screens
-		forwardPicturesToScreens(socket.id);
+        //forward updated list to remote and image index to all connected screens
+        forwardPicturesToScreens(socket.id);
 	});
 	
-	//event if a connection information of a screen has changed
+	socket.on('zoom image', function(obj){
+        console.log('zoom image index: ' + obj.id, obj.zoomLevel);
+        // currentImageIndex = obj.id;
+
+        //forward updated list to remote and image index to all connected screens
+        //forwardSocketNamesToRemoteControl();
+        // forwardPicturesToScreens();
+        performZoom(obj.zoomLevel);
+    });
+    
+    //event if a connection information of a screen has changed
 	socket.on('connection changed', function(screenId){
 		console.log('status update for remote ' + socket.id + ' and screen ' + screenId);
 		var status = 'disconnected';
@@ -122,6 +135,7 @@ function forwardSocketNamesToRemoteControl() {
 //function to forward the image index to the screens
 function forwardPicturesToScreens(remoteSocketId) {
 	console.log('forward picture to screens');
+	console.log('test');
 	//if remoteSocketId specified -> update all connected screens of that remote
 	if (remoteSocketId != undefined) {
 		var remotesRoom = io.nsps['/'].adapter.rooms[remoteSocketId];
@@ -143,9 +157,11 @@ function forwardPicturesToScreens(remoteSocketId) {
 				}
 			}
 		}*/
+		console.log(remotesRoom);
 		for (var remoteSocketId in remotesRoom.sockets) {
 			var activeScreensCounter = 0;
 			var screenRoom = io.nsps['/'].adapter.rooms['screens'];
+			console.log(screenRoom);
 			if(screenRoom != undefined) {
 				for (var screenSocketId in screenRoom.sockets) {
 					if (io.sockets.adapter.sids[screenSocketId][remoteSocketId]) {
@@ -159,4 +175,14 @@ function forwardPicturesToScreens(remoteSocketId) {
 			}
 		}
 	}	
+}
+
+function performZoom(zoomLevel) {
+    var activeScreensCounter = 0;
+    for (i = 0; i < screens.length; i++) {
+        if(screens[i][1] === 'connected') {
+            io.sockets.connected[screens[i][0].id].emit('image zoom', {id: (currentImageIndex + activeScreensCounter), zoomLevel: zoomLevel});
+            activeScreensCounter += 1;
+        }
+    }
 }

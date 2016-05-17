@@ -16,10 +16,16 @@ function showImage (index){
     var img = document.querySelector('#image');
     var msg = document.querySelector('#msg');
     if (index >= 0 && index <= imageCount){
-        img.setAttribute("src", "images/" +index +".jpg");
+        img.setAttribute("src", "images/" + index + ".jpg");
         msg.style.display = 'none';
         img.style.display = 'block';
     }
+}
+
+function zoomImage(index, zoomLevel) {
+    var image = document.querySelector('#image');
+    image.className = 'zoom-' + zoomLevel;
+    console.log('zoomlevel =' + zoomLevel);
 }
 
 function clearImage(){
@@ -46,17 +52,23 @@ function getQueryParams() {
 
 function connectToServer(){
     // TODO connect to the socket.io server
-	
-	socket = io({query: "name="+devicename});
-	
-	socket.on('image index', function(index){
-		if(index >= 0 && index < (imageCount)) {
-			showImage(index);
-		} else if(index >= (imageCount - 1)) {
-			showImage(imageCount - 1);
-		} 
-		else {
-			clearImage();
-		}
-	});
+    
+    socket = io({query: "name="+devicename});
+    console.log(socket);
+    
+    socket.on('image index', function(index){
+        if(index >= 0 && index < (imageCount)) {
+            showImage(index);
+        } else if(index >= (imageCount - 1)) {
+            showImage(imageCount - 1);
+        } 
+        else {
+            clearImage();
+        }
+    });
+
+    socket.on('image zoom', function(obj){
+        // i don't know why the index is not correct
+        zoomImage(obj.id, obj.zoomLevel);
+    });
 }
