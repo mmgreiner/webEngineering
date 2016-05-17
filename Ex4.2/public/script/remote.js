@@ -36,7 +36,8 @@ function showImage (index){
 
 function zoomImage(zoomLevel) {
 
-    socket.emit('zoom image', {'id': currentImage, 'zoomLevel': zoomLevel});
+    //socket.emit('zoom image', {'id': currentImage, 'zoomLevel': zoomLevel});
+	socket.emit('zoom image', zoomLevel);
 }
 
 function initialiseGallery(){

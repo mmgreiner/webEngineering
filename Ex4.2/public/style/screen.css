@@ -4,6 +4,27 @@ img {
     display:block;
 }
 
+.zoom-0 {
+	transition: all 0.1s ease-out;
+	max-width: 100%;
+}
+
+.zoom-1 {
+	transition: all 0.1s ease-out;
+	max-width: 60%;
+}
+
+.zoom-2 {
+	transition: all 0.1s ease-out;
+	max-width: 30%;
+}
+
+.zoom-3 {
+	transition: all 0.1s ease-out;
+	max-width: 15%;
+}
+
+
 #msg {
     margin: 10%;
 }

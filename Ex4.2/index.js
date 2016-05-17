@@ -70,14 +70,18 @@ io.on('connection', function(socket){
         forwardPicturesToScreens();
 	});
 	
-	socket.on('zoom image', function(obj){
-        console.log('zoom image index: ' + obj.id, obj.zoomLevel);
+	//socket.on('zoom image', function(obj){
+	socket.on('zoom image', function(zoomLevel){
+        //console.log('zoom image index: ' + obj.id, obj.zoomLevel);
         // currentImageIndex = obj.id;
+		
+		console.log('zoom level changed: ' + zoomLevel);
 
         //forward updated list to remote and image index to all connected screens
         //forwardSocketNamesToRemoteControl();
         // forwardPicturesToScreens();
-        performZoom(obj.zoomLevel);
+        //performZoom(socket.id, obj.zoomLevel);
+		performZoom(socket.id, zoomLevel);
     });
     
     //event if a connection information of a screen has changed
@@ -177,12 +181,20 @@ function forwardPicturesToScreens(remoteSocketId) {
 	}	
 }
 
-function performZoom(zoomLevel) {
-    var activeScreensCounter = 0;
+function performZoom(remoteSocketId, zoomLevel) {
+	var remotesRoom = io.nsps['/'].adapter.rooms[remoteSocketId];
+	if(remotesRoom != undefined) {
+		for (var screenSocketId in remotesRoom.sockets) {
+			if(screenSocketId != remoteSocketId) {
+				io.sockets.connected[screenSocketId].emit('image zoom', zoomLevel);
+			}
+		}
+	}
+    /*var activeScreensCounter = 0;
     for (i = 0; i < screens.length; i++) {
         if(screens[i][1] === 'connected') {
             io.sockets.connected[screens[i][0].id].emit('image zoom', {id: (currentImageIndex + activeScreensCounter), zoomLevel: zoomLevel});
             activeScreensCounter += 1;
         }
-    }
+    }*/
 }
