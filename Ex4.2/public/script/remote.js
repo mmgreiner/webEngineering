@@ -174,23 +174,24 @@ function onOrientationChange(tiltLR, tiltFB, dir) {
 
 //-------------------- first attempt -------------------//
 
-if(tiltFB < 0){
-    currentZoom = 0;
-    zoomImage(currentZoom);
+	if(tiltFB < 0 && currentZoom !== 0){
+		currentZoom = 0;
+		zoomImage(currentZoom);
 
-}else if(tiltFB > 0 && tiltFB < offsetFB_1){
-    currentZoom = 1;
-    zoomImage(currentZoom);
+	}else if(tiltFB > 0 && tiltFB < offsetFB_1 && currentZoom !== 1){
+		currentZoom = 1;
+		zoomImage(currentZoom);
 
-}else if(tiltFB > offsetFB_1 && tiltFB < offsetFB_2){
-    currentZoom = 2;
-    zoomImage(currentZoom);
+	}else if(tiltFB > offsetFB_1 && tiltFB < offsetFB_2 && currentZoom !== 2){
+		currentZoom = 2;
+		zoomImage(currentZoom);
 
-}else{
-    currentZoom = 3;
-    zoomImage(currentZoom);
+	}else if( tiltFB > offsetFB_2 && currentZoom !== 3){
+		currentZoom = 3;
+		zoomImage(currentZoom);
 
-}
+	}
+
 
     //console.log(tiltLR, tiltFB, dir);
 }
