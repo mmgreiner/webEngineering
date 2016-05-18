@@ -5,11 +5,11 @@ Ex4.1/node_modules/*
 GalleryRemote_Skeleton/*
 # Visual Studio files
 .vscode/*
-
 *.db-shm
-
-Ex4.1/.vscode/.browse.VC.db
-
+*.VC.db
 *.db-wal
+.vscode/launch.json
+# KDiff3 files
+*.orig
 
 Ex4.1/.vscode/launch.json
